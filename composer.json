@@ -1,4 +1,9 @@
 {
+    "name": "savvywombat/wiki-lite",
+    "description": "Wiki-Lite: light weight wiki",
+    "keywords": ["wiki", "savvywombat", "lite", "light"],
+    "license": "MIT",
+    "type": "project",
     "require": {
         "graham-campbell/markdown": "^8.0"
     }
