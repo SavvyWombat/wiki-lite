@@ -1,0 +1,5 @@
+{
+    "require": {
+        "graham-campbell/markdown": "^8.0"
+    }
+}
