@@ -6,5 +6,19 @@
     "type": "project",
     "require": {
         "graham-campbell/markdown": "^8.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "SavvyWombat\\WikiLite\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SavvyWombat\\Tests\\WikiLite\\": "tests/"
+        }
     }
 }
