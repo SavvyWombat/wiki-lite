@@ -24,7 +24,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "SavvyWombat\\WikiList\\ServiceProvider"
+                "SavvyWombat\\WikiLite\\ServiceProvider"
             ]
         }
     }
