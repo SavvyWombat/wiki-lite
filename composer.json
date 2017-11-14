@@ -20,5 +20,12 @@
         "psr-4": {
             "SavvyWombat\\Tests\\WikiLite\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SavvyWombat\\WikiList\\ServiceProvider"
+            ]
+        }
     }
 }
