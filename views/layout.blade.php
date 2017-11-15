@@ -1,0 +1,1 @@
+@yield('wiki-content')

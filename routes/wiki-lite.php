@@ -7,6 +7,6 @@
 |
 */
 
-Route::get(config('wikilite.base'), function () {
-    return view('wikilite::welcome');
+Route::get(config('wiki-lite.base'), function () {
+    return view('wiki-lite::welcome');
 });

@@ -14,13 +14,14 @@ class ServiceProvider extends IlluminateServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/wikilite.php' => config_path('wikilite.php'),
+            __DIR__ . '/../config/wiki-lite.php' => config_path('wiki-lite.php'),
+            __DIR__ . '/../views/layout.blade.php' => resource_path('views/vendor/wiki-lite/layout.blade.php'),
         ]);
 
 
-        $this->loadRoutesFrom(__DIR__ . '/../routes/wikilite.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/wiki-lite.php');
 
 
-        $this->loadViewsFrom(__DIR__ . '/../views', 'wikilite');
+        $this->loadViewsFrom(__DIR__ . '/../views', 'wiki-lite');
     }
 }
