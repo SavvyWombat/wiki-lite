@@ -11,4 +11,11 @@ class WikiController extends BaseController
     {
         return view('wiki-lite::welcome');
     }
+
+
+
+    public function save()
+    {
+        return "TODO: save the content";
+    }
 }

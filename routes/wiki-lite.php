@@ -15,7 +15,14 @@ Route::group(
     function() {
         Route::get(config('wiki-lite.base'), 
             [
-                'uses' => 'WikiController@welcome'
+                'as' => 'wiki-lite.index',
+                'uses' => 'WikiController@welcome',
+            ]);
+
+        Route::post(config('wiki-lite.base') . "/save",
+            [
+                'as' => 'wiki-lite.save',
+                'uses' => 'WikiController@save',
             ]);
     }
 );

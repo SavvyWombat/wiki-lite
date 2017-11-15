@@ -6,4 +6,7 @@
 <p>
     Let's get this wiki started.
 </p>
-@endsection()
+
+@include("wiki-lite::_form")
+
+@endsection
