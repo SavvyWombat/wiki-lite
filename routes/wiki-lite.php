@@ -7,6 +7,15 @@
 |
 */
 
-Route::get(config('wiki-lite.base'), function () {
-    return view('wiki-lite::welcome');
-});
+Route::group(
+    [
+        'namespace' => 'SavvyWombat\WikiLite\Controllers',
+        'middleware' => ['web'],
+    ],
+    function() {
+        Route::get(config('wiki-lite.base'), 
+            [
+                'uses' => 'WikiController@welcome'
+            ]);
+    }
+);
