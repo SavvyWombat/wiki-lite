@@ -39,4 +39,15 @@ class WikiLitePage extends Model
             'parent_id'
         );
     }
+
+
+
+    /**
+     * Set the slug automatically when entering a title
+     */
+    public function setTitleAttribute($title)
+    {
+        $this->attributes['title'] = $title;
+        $this->attributes['slug'] = str_slug($title);
+    }
 }
