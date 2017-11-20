@@ -8,6 +8,7 @@
         "graham-campbell/markdown": "^8.0"
     },
     "require-dev": {
+        "fzaninotto/faker": "~1.4",
         "mockery/mockery": "^1.0",
         "phpunit/phpunit": "^6.1"
     },
@@ -18,7 +19,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SavvyWombat\\Tests\\WikiLite\\": "tests/"
+            "SavvyWombat\\WikiLite\\Tests\\": "tests/"
         }
     },
     "extra": {
