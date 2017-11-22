@@ -9,6 +9,7 @@ class PageTest extends TestCase
 {
     /**
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
     public function testSave()
     {

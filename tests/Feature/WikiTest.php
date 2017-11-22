@@ -16,6 +16,5 @@ class WikiTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Welcome to WikiLite by SavvyWombat')
             ->assertSee('Let\'s get this wiki started.');
-
     }
 }
