@@ -6,6 +6,8 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    protected $baseUrl = 'http://localhost';
+
     /**
      * Get package providers.
      *
@@ -32,5 +34,16 @@ class TestCase extends BaseTestCase
         return [
             // No facades yet
         ];
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return void
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('wiki-lite', require __DIR__ . '/../../config/wiki-lite.php');
     }
 }
