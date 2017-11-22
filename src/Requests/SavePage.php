@@ -25,7 +25,9 @@ class SavePage extends FormRequest
     public function rules()
     {
         return [
-
+            'title' => [
+                'required',
+            ],
         ];
     }
 
@@ -37,7 +39,7 @@ class SavePage extends FormRequest
     public function messages()
     {
         return [
-
+            'title.required' => 'All pages must have a unique title',
         ];
     }
 }

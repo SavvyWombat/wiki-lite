@@ -13,7 +13,19 @@ class PageTest extends TestCase
      */
     public function testSave()
     {
-        $this->post('/wiki/save')
+        $this->post('/wiki/save', [
+                'title' => 'Fresh new wiki page',
+            ])
             ->assertStatus(200);
+    }
+
+    /**
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function testSave_ensureTitleIsSet()
+    {
+        $this->post('/wiki/save')
+            ->assertSessionHasErrors();
     }
 }
