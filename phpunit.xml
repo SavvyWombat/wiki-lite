@@ -27,6 +27,10 @@
         </whitelist>
     </filter>
 
+    <php>
+        <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
+    </php>
+
     <logging>
         <log type="coverage-html" 
              target="docs/coverage" 
