@@ -10,6 +10,8 @@ class ServiceProvider extends IlluminateServiceProvider
      * Bootstrap any application services.
      *
      * @return void
+     * 
+     * @codeCoverageIgnore
      */
     public function boot()
     {
