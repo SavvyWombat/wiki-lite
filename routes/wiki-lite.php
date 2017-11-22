@@ -9,20 +9,21 @@
 
 Route::group(
     [
+        'prefix' => config('wiki-lite.base'),
         'namespace' => 'SavvyWombat\WikiLite\Controllers',
         'middleware' => ['web'],
     ],
     function() {
-        Route::get(config('wiki-lite.base'), 
+        Route::get('/', 
             [
                 'as' => 'wiki-lite.index',
                 'uses' => 'WikiController@welcome',
             ]);
 
-        Route::post(config('wiki-lite.base') . "/save",
+        Route::post('/save',
             [
                 'as' => 'wiki-lite.save',
-                'uses' => 'WikiController@save',
+                'uses' => 'PageController@save',
             ]);
     }
 );

@@ -5,10 +5,10 @@ namespace SavvyWombat\WikiLite\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 
 
-class WikiController extends BaseController
+class PageController extends BaseController
 {
-    public function welcome()
+    public function save()
     {
-        return view('wiki-lite::welcome');
+        return "TODO: save the content";
     }
 }
