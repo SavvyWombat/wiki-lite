@@ -20,6 +20,12 @@ Route::group(
                 'uses' => 'WikiController@welcome',
             ]);
 
+         Route::get('/edit', 
+            [
+                'as' => 'wiki-lite.edit',
+                'uses' => 'PageController@edit',
+            ]);
+
         Route::post('/save',
             [
                 'as' => 'wiki-lite.save',

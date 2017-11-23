@@ -8,6 +8,13 @@ use Illuminate\Validation\Rule;
 class SavePage extends FormRequest
 {
     /**
+     * Redirect route when errors occur.
+     *  
+     * @var string
+     */
+    protected $redirectRoute = 'wiki-lite.edit';
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool

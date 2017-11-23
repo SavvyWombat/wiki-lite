@@ -23,9 +23,10 @@ class PageTest extends TestCase
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
-    public function testSave_ensureTitleIsSet()
+    public function testSave_ensureRequiredContent()
     {
         $this->post('/wiki/save')
-            ->assertSessionHasErrors();
+            ->assertRedirect('/wiki/edit')
+            ->assertSessionHasErrors(['title']);
     }
 }
