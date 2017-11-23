@@ -4,6 +4,7 @@ namespace SavvyWombat\WikiLite\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Webpatser\Uuid\Uuid;
 
 class Page extends Model
 {
@@ -20,6 +21,34 @@ class Page extends Model
      * @var string
      */
     protected $table = 'wiki_lite_pages';
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+
+
+    /**
+     * Boot function for using with User Events.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model) {
+            // enforce new records to have a version 4 (truly random) UUID
+            $model->id = Uuid::generate(4);
+
+            // enforce updated_at date to be now
+            // this is because we are really creating the revision of a page
+            $model->updated_at = Carbon::now()->toDateTimeString();
+        });
+    }
 
 
 
