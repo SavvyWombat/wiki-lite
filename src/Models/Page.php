@@ -5,7 +5,7 @@ namespace SavvyWombat\WikiLite\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class WikiLitePage extends Model
+class Page extends Model
 {
     /**
      * The attributes that should be mutated to dates.

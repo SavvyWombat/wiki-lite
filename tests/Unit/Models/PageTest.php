@@ -2,14 +2,17 @@
 
 namespace SavvyWombat\WikiLite\Tests\Unit\Models;
 
-use SavvyWombat\WikiLite\Models\WikiLitePage;
+use SavvyWombat\WikiLite\Models\Page;
 use SavvyWombat\WikiLite\Tests\TestCase;
 
-class WikiLitePageTest extends TestCase
+class PageTest extends TestCase
 {
-    public function testSlug()
+    /**
+     * @covers SavvyWombat\WikiLite\Models\Page::setTitleAttribute
+     */
+    public function testSlugIsSetWithTitle()
     {
-        $page = new WikiLitePage();
+        $page = new Page();
 
         $page->title = "Title needs to be slugged";
 
