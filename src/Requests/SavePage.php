@@ -35,6 +35,9 @@ class SavePage extends FormRequest
             'title' => [
                 'required',
             ],
+            'content' => [
+                'required',
+            ],
         ];
     }
 
@@ -47,6 +50,7 @@ class SavePage extends FormRequest
     {
         return [
             'title.required' => 'All pages must have a unique title',
+            'content.required' => 'A wiki page must have content',
         ];
     }
 }
