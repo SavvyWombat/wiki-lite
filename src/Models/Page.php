@@ -14,6 +14,13 @@ class Page extends Model
      */
     protected $dates = [ 'updated_at' ];
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'wiki_lite_pages';
+
 
 
     /**
