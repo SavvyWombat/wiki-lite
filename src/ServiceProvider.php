@@ -22,6 +22,9 @@ class ServiceProvider extends IlluminateServiceProvider
         ]);
 
 
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+
         $this->loadRoutesFrom(__DIR__ . '/../routes/wiki-lite.php');
 
 
