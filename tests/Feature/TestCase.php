@@ -3,9 +3,13 @@
 namespace SavvyWombat\WikiLite\Tests\Feature;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TestCase extends BaseTestCase
 {
+    // Refreshes the database between tests
+    use RefreshDatabase;
+
     /**
      * The base url to use for testing
      *
@@ -22,6 +26,8 @@ class TestCase extends BaseTestCase
         $this->artisan('migrate', [
             '--database' => 'testing',
         ]);
+
+        $this->withFactories(__DIR__ . '/../../database/factories');
     }
 
     /**
