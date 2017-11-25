@@ -22,12 +22,15 @@ class PageController extends BaseController
     public function save(Requests\SavePage $request)
     {
         $page = new Page();
+        if ($request->input('uuid')) {
+            $page->uuid = $request->input('uuid');
+        }
         $page->content = $request->input('content');
         $page->title = $request->input('title');
         $page->save();
 
         return redirect()->route('wiki-lite.view', [
-            'slug' => 'fresh-new-wiki-page',
+            'slug' => $page->slug,
         ]);
     }
 }

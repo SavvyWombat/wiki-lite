@@ -41,9 +41,10 @@ class Page extends Model
         parent::boot();
 
         static::creating(function($model) {
-            // enforce new records to have a version 4 (truly random) UUID
-            $model->id = Uuid::generate(4);
-
+            // enforce uuid on new pages
+            if (is_null($model->uuid)) {
+                $model->uuid = Uuid::generate(4)->string;
+            }
             // enforce updated_at date to be now
             // this is because we are really creating the revision of a page
             $model->updated_at = Carbon::now()->toDateTimeString();
@@ -59,8 +60,8 @@ class Page extends Model
     {
         return $this->hasMany(
             WikiLitePage::class,
-            'parent_id',
-            'id'
+            'parent_uuid',
+            'uuid'
         );
     }
 
@@ -71,8 +72,8 @@ class Page extends Model
     {
         return $this->belongsTo(
             WikiLitePage::class,
-            'id',
-            'parent_id'
+            'uuid',
+            'parent_uuid'
         );
     }
 

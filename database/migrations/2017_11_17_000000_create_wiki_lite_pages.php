@@ -15,8 +15,8 @@ class CreateWikiLitePages extends Migration
     {
         Schema::create('wiki_lite_pages', function(Blueprint $table) {
             $table->increments('revision');
-            $table->uuid('id');
-            $table->uuid('parent_id')
+            $table->uuid('uuid');
+            $table->uuid('parent_uuid')
                 ->nullable();
             $table->integer('user_id')
                 ->default(0);
