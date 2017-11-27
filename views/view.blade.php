@@ -1,8 +1,8 @@
 @extends("wiki-lite::layout")
 
 @section('wiki-content')
-<h1>View content</h1>
+<h1>{{ $page->title }}</h1>
 
-@include("wiki-lite::_form")
+{{ $page->content }}
 
 @endsection

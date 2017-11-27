@@ -5,13 +5,27 @@ namespace SavvyWombat\WikiLite\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 use SavvyWombat\WikiLite\Models\Page;
 use SavvyWombat\WikiLite\Requests;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class PageController extends BaseController
 {
     public function view($slug)
     {
-        return view('wiki-lite::view');
+        try {
+            $page = Page::where('slug', $slug)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $page = new Page();
+            $page->title = $slug;
+
+            return response()->view('wiki-lite::missing', [
+                'page' => $page,
+            ], 404);
+        }
+
+        return view('wiki-lite::view', [
+            'page' => $page,
+        ]);
     }
 
     public function edit()

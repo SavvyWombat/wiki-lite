@@ -12,6 +12,34 @@ class PageTest extends TestCase
 {
     /**
      * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     */
+    public function it_presents_the_requested_page()
+    {
+        $page = factory(Page::class)->create();
+
+        $this->get("/wiki/view/{$page->slug}")
+            ->assertStatus(200)
+            ->assertSee($page->title)
+            ->assertSee($page->content);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     */
+    public function it_presents_a_404_for_missing_pages()
+    {
+        $this->get('/wiki/view/this-is-not-a-page')
+            ->assertStatus(404)
+            ->assertSee('Not found')
+            ->assertSee('"this-is-not-a-page" doesn\'t seem to exist. Create a new page?');
+    }
+
+
+
+    /**
+     * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
@@ -38,10 +66,9 @@ class PageTest extends TestCase
      */
     public function it_creates_a_new_revision_with_the_same_uuid_and_redirects()
     {
-        factory(Page::class)->create();
-        $existingPage = Page::first();
+        $existingPage = factory(Page::class)->create();
 
-        $response = $this->post('/wiki/save', [
+        $this->post('/wiki/save', [
                 'uuid' => $existingPage->uuid,
                 'content' => 'Changed the content',
                 'title' => 'Changed the title',

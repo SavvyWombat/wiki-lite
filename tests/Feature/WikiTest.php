@@ -27,10 +27,9 @@ class WikiTest extends TestCase
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\WikiController::welcome
      */
-    public function it_present_the_index_of_pages()
+    public function it_presents_the_index_of_pages()
     {
-        factory(Page::class)->create();
-        $page = Page::first();
+        $page = factory(Page::class)->create();
 
         $this->get('/wiki')
             ->assertStatus(200)
