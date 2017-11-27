@@ -9,6 +9,13 @@ use Webpatser\Uuid\Uuid;
 class Page extends Model
 {
     /**
+     * Specifies the tables primary key column. Assumes `id` if not set
+     *
+     * @var string
+     */
+    protected $primaryKey = 'revision';
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
