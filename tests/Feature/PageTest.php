@@ -11,10 +11,11 @@ use SavvyWombat\WikiLite\Models\Page;
 class PageTest extends TestCase
 {
     /**
+     * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
-    public function testSave_newPage()
+    public function it_saves_a_new_page_and_redirects()
     {
         $this->post('/wiki/save', [
                 'content' => 'Some content for our fresh new page',
@@ -31,10 +32,11 @@ class PageTest extends TestCase
     }
 
     /**
+     * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
-    public function testSave_existingPage()
+    public function it_creates_a_new_revision_with_the_same_uuid_and_redirects()
     {
         factory(Page::class)->create();
         $existingPage = Page::first();
@@ -65,11 +67,12 @@ class PageTest extends TestCase
     }
 
     /**
+     * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @covers SavvyWombat\WikiLite\Requests\SavePage::rules
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
-    public function testSave_ensureRequiredContent()
+    public function it_returns_errors_when_missing_required_content()
     {
         $this->post('/wiki/save')
             ->assertStatus(302)

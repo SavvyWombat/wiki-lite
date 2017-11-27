@@ -8,9 +8,10 @@ namespace SavvyWombat\WikiLite\Tests\Feature;
 class WikiTest extends TestCase
 {
     /**
+     * @test
      * @covers SavvyWombat\WikiLite\Controllers\WikiController::welcome
      */
-    public function testWelcome()
+    public function it_presents_the_welcome_page_when_no_pages_saved()
     {
         $this->get('/wiki')
             ->assertStatus(200)
