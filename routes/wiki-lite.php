@@ -19,7 +19,7 @@ Route::group(
             'uses' => 'WikiController@welcome',
         ]);
 
-        Route::get('/edit', [
+        Route::get('/edit/{slug?}', [
             'as' => 'wiki-lite.edit',
             'uses' => 'PageController@edit',
         ]);

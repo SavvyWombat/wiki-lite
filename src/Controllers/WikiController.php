@@ -19,7 +19,9 @@ class WikiController extends BaseController
                 [ 'pages' => $pages, ]
             );
         } else {
-            return view('wiki-lite::welcome');
+            return view('wiki-lite::welcome', [
+                'page' => new Page(),
+            ]);
         }
     }
 }

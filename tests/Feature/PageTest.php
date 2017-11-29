@@ -113,4 +113,30 @@ class PageTest extends TestCase
             ->assertRedirect('/wiki/edit')
             ->assertSessionHasErrors(['title', 'content']);
     }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::edit
+     */
+    public function it_loads_existing_data_in_the_edit_form()
+    {
+        $page = factory(Page::class)->create();
+
+        $this->get("/wiki/edit/{$page->slug}")
+            ->assertStatus(200)
+            ->assertSee("Editing " . $page->title)
+            ->assertSee($page->title)
+            ->assertSee($page->content);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::edit
+     */
+    public function it_loads_an_empty_form_when_creating_new_page()
+    {
+        $this->get("/wiki/edit")
+            ->assertStatus(200)
+            ->assertSee("Creating new page");
+    }
 }

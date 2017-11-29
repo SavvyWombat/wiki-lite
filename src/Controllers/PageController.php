@@ -28,9 +28,18 @@ class PageController extends BaseController
         ]);
     }
 
-    public function edit()
+    public function edit($slug = '')
     {
-        return view('wiki-lite::edit');
+        try {
+            $page = Page::where('slug', $slug)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $page = new Page();
+            $page->title = $slug;
+        }
+
+        return view('wiki-lite::edit', [
+            'page' => $page,
+        ]);
     }
 
     public function save(Requests\SavePage $request)

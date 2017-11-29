@@ -5,7 +5,7 @@
         <label for="title">Title</label>
 
         <div>
-            <input id="title" type="text" name="title" value="" required autofocus>
+            <input id="title" type="text" name="title" value="{{ $page->title }}" autofocus>
 
             @if ($errors->has('title'))
                 <span class="help-block">
@@ -21,7 +21,7 @@
         <div>
             <div class="textarea-wrap">
                 <div class="textarea-pull"></div>
-                <textarea id="content" name="content"{{ isset($required) ? ' required' : '' }}></textarea>
+                <textarea id="content" name="content">{{ $page->content }}</textarea>
             </div>
 
             <span class="help-block">
