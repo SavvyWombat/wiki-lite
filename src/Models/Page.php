@@ -66,7 +66,7 @@ class Page extends Model
     public function pages()
     {
         return $this->hasMany(
-            WikiLitePage::class,
+            Page::class,
             'parent_uuid',
             'uuid'
         );
@@ -78,9 +78,9 @@ class Page extends Model
     public function parent()
     {
         return $this->belongsTo(
-            WikiLitePage::class,
-            'uuid',
-            'parent_uuid'
+            Page::class,
+            'parent_uuid',
+            'uuid'
         );
     }
 
