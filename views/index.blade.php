@@ -5,7 +5,7 @@
 
 <ul>
     @foreach($pages as $page)
-        <ul>{{ $page->title }}</ul>
+        <ul>{{ wikilink($page->title) }}</ul>
     @endforeach
 </ul>
 

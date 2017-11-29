@@ -7,6 +7,7 @@ use SavvyWombat\WikiLite\Models\Page;
 /**
  * @uses SavvyWombat\WikiLite\Models\Page
  * @uses SavvyWombat\WikiLite\ServiceProvider
+ * @uses \wikilink
  */
 class WikiTest extends TestCase
 {
