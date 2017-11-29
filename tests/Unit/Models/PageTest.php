@@ -28,4 +28,24 @@ class PageTest extends TestCase
             $page->title
         );
     }
+
+
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Models\Page::setUuidAttribute
+     * @uses SavvyWombat\WikiLite\Models\Page::boot
+     */
+    public function it_does_not_allow_uuid_to_be_modified()
+    {
+        $page = new Page();
+
+        $page->uuid = "123456";
+        $page->uuid = "789123";
+
+        $this->assertEquals(
+            "123456",
+            $page->uuid
+        );
+    }
 }

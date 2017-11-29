@@ -94,4 +94,16 @@ class Page extends Model
         $this->attributes['title'] = $title;
         $this->attributes['slug'] = str_slug($title);
     }
+
+
+
+    /**
+     * Prevent the uuid from being modified once set
+     */
+    public function setUuidAttribute($uuid)
+    {
+        if (!isset($this->attributes['uuid']) || is_null($this->attributes['uuid'])) {
+            $this->attributes['uuid'] = $uuid;
+        }
+    }
 }
