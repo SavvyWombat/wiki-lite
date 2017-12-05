@@ -31,8 +31,6 @@ class WikiLinkExtension extends Extension
      * Returns a list of inline parsers to add to the existing list
      *
      * @return League\CommonMark\Inline\Parser\InlineParserInterface[]
-     *
-     * @codeCoverageIgnore
      */
     public function getInlineParsers()
     {

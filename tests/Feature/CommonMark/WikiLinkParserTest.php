@@ -15,7 +15,6 @@ class WikiLinkParserTest extends TestCase
     /**
      * @test
      * @dataProvider dataFor_it_parses_wikilinks
-     * @covers SavvyWombat\WikiLite\CommonMark\WikiLinkParser
      *
      * @param string $string
      * @param string $expectedUrl

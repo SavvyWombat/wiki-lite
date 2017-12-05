@@ -13,8 +13,6 @@ class WikiLinkParser extends AbstractInlineParser
 
     /**
      * @return string[]
-     *
-     * @codeCoverageIgnore
      */
     public function getCharacters()
     {
