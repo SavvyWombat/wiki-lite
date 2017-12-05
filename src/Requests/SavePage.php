@@ -42,10 +42,6 @@ class SavePage extends FormRequest
                 'sometimes',
                 'regex:/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/',
             ],
-            'parent_uuid' => [
-                'sometimes',
-                'regex:/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}/',
-            ],
         ];
     }
 
@@ -59,8 +55,7 @@ class SavePage extends FormRequest
         return [
             'title.required' => 'All pages must have a unique title',
             'content.required' => 'A wiki page must have content',
-            'uuid.regex' => 'Valid UUID for the page must be provided',
-            'parent_uuid.regex' => 'Valid UUID for the page must be provided',
+            'uuid.regex' => 'Valid UUID for the page most be provided',
         ];
     }
 }
