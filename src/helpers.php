@@ -2,12 +2,11 @@
 
 if (!function_exists("wikilink")) {
     function wikilink($title) {
-
-        return sprintf("[%s](%s/view/%s)",
-            $title,
-            config("wiki-lite.base"),
-            str_slug($title)
+        $url = str_replace("//", "/", 
+            config("wiki-lite.base") . "/view/" . str_slug($title)
         );
+
+        return "[$title]($url)";
     }
 }
 

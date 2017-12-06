@@ -11,7 +11,7 @@ return [
     | Leave out the trailing slash
     |
     | Default: /wiki 
-    | If you want the wiki as your site homepage, set it to ''
+    | If you want the wiki as your site homepage, set it to '/'
     |
     */
 
