@@ -93,7 +93,7 @@ class Page extends Model
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeLatest($query, $slug)
+    public function scopeRevisions($query, $slug)
     {
         return $query->where(function($query) use ($slug) {
                 $uuid = Page::where('slug', $slug)
@@ -102,8 +102,7 @@ class Page extends Model
 
                 $query->where('uuid', $uuid);
             })
-            ->orderBy('revision', 'desc')
-            ->take(1);
+            ->orderBy('revision', 'desc');
     }
 
 
