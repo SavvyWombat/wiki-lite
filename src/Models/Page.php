@@ -87,6 +87,22 @@ class Page extends Model
 
 
     /**
+     * Only get the latest revision of the given slug
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $slug
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeLatest($query, $slug)
+    {
+        return $query->where('slug', $slug)
+            ->orderBy('revision', 'desc')
+            ->take(1);
+    }
+
+
+
+    /**
      * Set the slug automatically when entering a title
      */
     public function setTitleAttribute($title)
