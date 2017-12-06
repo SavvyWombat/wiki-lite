@@ -95,7 +95,13 @@ class Page extends Model
      */
     public function scopeLatest($query, $slug)
     {
-        return $query->where('slug', $slug)
+        return $query->where(function($query) use ($slug) {
+                $uuid = Page::where('slug', $slug)
+                    ->firstOrFail()
+                    ->uuid;
+
+                $query->where('uuid', $uuid);
+            })
             ->orderBy('revision', 'desc')
             ->take(1);
     }

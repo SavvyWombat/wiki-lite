@@ -115,6 +115,26 @@ class PageTest extends TestCase
             ->assertSee($secondRevision->content);
     }
 
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     * @uses \wikilinks
+     * @uses \wikilink
+     */
+    public function it_gets_the_latest_revision_of_the_page_for_an_old_slug()
+    {
+        $firstRevision = factory(Page::class)->create();
+
+        $secondRevision = factory(Page::class)->make();
+        $secondRevision->uuid = $firstRevision->uuid;
+        $secondRevision->save();
+
+        $this->get("/wiki/view/{$firstRevision->slug}")
+            ->assertStatus(200)
+            ->assertSee($secondRevision->title)
+            ->assertSee($secondRevision->content);
+    }
+
 
 
     /**
