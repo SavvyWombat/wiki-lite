@@ -64,6 +64,7 @@ class TestCase extends BaseTestCase
     {
         return [
             'SavvyWombat\WikiLite\ServiceProvider',
+            'GrahamCampbell\Markdown\MarkdownServiceProvider',
         ];
     }
 
@@ -77,7 +78,7 @@ class TestCase extends BaseTestCase
     protected function getPackageAliases($app)
     {
         return [
-            // No facades yet
+            'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown',
         ];
     }
 }

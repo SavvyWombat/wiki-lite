@@ -13,9 +13,9 @@ class wikilinkTest extends TestCase
     public function it_generates_a_link_based_on_title()
     {
         $this->assertEquals(
-            sprintf("<a href='/wiki/%s'>%s</a>",
-                "the-title-i-want-to-link-to",
-                "The title I want to link to"
+            sprintf("[%s](/wiki/view/%s)",
+                "The title I want to link to",
+                "the-title-i-want-to-link-to"
             ),
             wikilink("The title I want to link to")
         );

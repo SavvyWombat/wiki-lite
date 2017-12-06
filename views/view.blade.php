@@ -10,7 +10,7 @@
 
 <h1>{{ $page->title }}</h1>
 
-{{ $page->content }}
+{!! Markdown::convertToHtml(wikilinks($page->content)) !!}
 
 @include('wiki-lite::_pagelist', [ 'pages' => $page->pages ])
 

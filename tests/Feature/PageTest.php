@@ -14,6 +14,8 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     * @uses \wikilinks
+     * @uses \wikilink
      */
     public function it_presents_the_requested_page()
     {
@@ -28,6 +30,8 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     * @uses \wikilinks
+     * @uses \wikilink
      */
     public function it_presents_a_404_for_missing_pages()
     {
@@ -41,6 +45,8 @@ class PageTest extends TestCase
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
      * @covers SavvyWombat\WikiLite\Models\Page::pages
+     * @uses \wikilinks
+     * @uses \wikilink
      */
     public function it_lists_subpages()
     {
@@ -62,6 +68,8 @@ class PageTest extends TestCase
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
      * @covers SavvyWombat\WikiLite\Models\Page::parent
+     * @uses \wikilinks
+     * @uses \wikilink
      */
     public function it_lists_parents()
     {
