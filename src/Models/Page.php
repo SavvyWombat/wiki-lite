@@ -67,16 +67,21 @@ class Page extends Model
      * @param string $slug
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeRevisions($query, $slug)
+    public function scopeRevisions($query, $slug = "")
     {
         return $query->where(function($query) use ($slug) {
+            if (!empty($slug)) {
                 $uuid = Page::where('slug', $slug)
                     ->firstOrFail()
                     ->uuid;
 
                 $query->where('uuid', $uuid);
-            })
-            ->orderBy('revision', 'desc');
+            } else {
+                $subQuery = 'SELECT max(revision) FROM wiki_lite_pages GROUP BY uuid';
+                $query->whereRaw("revision in ($subQuery)");
+            }
+        })
+        ->orderBy('revision', 'desc');
     }
 
 

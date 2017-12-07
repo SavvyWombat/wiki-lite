@@ -10,8 +10,8 @@ class WikiController extends BaseController
 {
     public function welcome()
     {
-        $pages = Page::where('parent_uuid', null)
-            ->orderBy('title', 'desc')
+        $pages = Page::revisions()
+            ->take(20)
             ->get();
 
         if (count($pages)) {

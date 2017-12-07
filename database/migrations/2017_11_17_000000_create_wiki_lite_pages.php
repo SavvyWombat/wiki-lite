@@ -26,16 +26,4 @@ class CreateWikiLitePages extends Migration
             $table->longText('content');
         });
     }
-
-
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('wiki_lite_pages');
-    }
 }
