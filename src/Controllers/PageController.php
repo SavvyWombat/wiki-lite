@@ -13,7 +13,7 @@ class PageController extends BaseController
     public function view($slug)
     {
         try {
-            $page = Page::where('slug', $slug)->firstOrFail();
+            $page = Page::revisions($slug)->firstOrFail();
         } catch (ModelNotFoundException $e) {
             $page = new Page();
             $page->title = $slug;
@@ -31,7 +31,7 @@ class PageController extends BaseController
     public function edit($slug = '')
     {
         try {
-            $page = Page::where('slug', $slug)->firstOrFail();
+            $page = Page::revisions($slug)->firstOrFail();
         } catch (ModelNotFoundException $e) {
             $page = new Page();
             $page->title = $slug;

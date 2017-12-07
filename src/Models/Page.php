@@ -87,6 +87,27 @@ class Page extends Model
 
 
     /**
+     * Only get the latest revision of the given slug
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $slug
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRevisions($query, $slug)
+    {
+        return $query->where(function($query) use ($slug) {
+                $uuid = Page::where('slug', $slug)
+                    ->firstOrFail()
+                    ->uuid;
+
+                $query->where('uuid', $uuid);
+            })
+            ->orderBy('revision', 'desc');
+    }
+
+
+
+    /**
      * Set the slug automatically when entering a title
      */
     public function setTitleAttribute($title)
