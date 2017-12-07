@@ -44,59 +44,6 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
-     * @covers SavvyWombat\WikiLite\Models\Page::pages
-     * @uses \wikilinks
-     * @uses \wikilink
-     */
-    public function it_lists_subpages()
-    {
-        $parent = factory(Page::class)->create();
-
-        $child = factory(Page::class)->make();
-        $child->parent_uuid = $parent->uuid;
-        $child->save();
-
-        $this->get("/wiki/view/{$parent->slug}")
-            ->assertStatus(200)
-            ->assertSee($parent->title)
-            ->assertSee($parent->content)
-            ->assertSee($child->title)
-            ->assertDontSee($child->content);
-    }
-
-    /**
-     * @test
-     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
-     * @covers SavvyWombat\WikiLite\Models\Page::parent
-     * @uses \wikilinks
-     * @uses \wikilink
-     */
-    public function it_lists_parents()
-    {
-        $grandparent = factory(Page::class)->create();
-
-        $parent = factory(Page::class)->make();
-        $parent->parent_uuid = $grandparent->uuid;
-        $parent->save();
-
-        $child = factory(Page::class)->make();
-        $child->parent_uuid = $parent->uuid;
-        $child->save();
-
-        $this->get("/wiki/view/{$child->slug}")
-            ->assertStatus(200)
-            ->assertSee("WikiLite")
-            ->assertSee($grandparent->title)
-            ->assertDontSee($grandparent->content)
-            ->assertSee($parent->title)
-            ->assertDontSee($parent->content)
-            ->assertSee($child->title)
-            ->assertSee($child->content);
-    }
-
-    /**
-     * @test
-     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
      * @uses \wikilinks
      * @uses \wikilink
      */

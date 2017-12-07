@@ -61,32 +61,6 @@ class Page extends Model
 
 
     /**
-     * Get subpages
-     */
-    public function pages()
-    {
-        return $this->hasMany(
-            Page::class,
-            'parent_uuid',
-            'uuid'
-        );
-    }
-
-    /**
-     * Get subpages
-     */
-    public function parent()
-    {
-        return $this->belongsTo(
-            Page::class,
-            'parent_uuid',
-            'uuid'
-        );
-    }
-
-
-
-    /**
      * Only get the latest revision of the given slug
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
