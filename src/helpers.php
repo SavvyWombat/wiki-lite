@@ -1,12 +1,21 @@
 <?php
 
+use SavvyWombat\WikiLite\Models\Page;
+
 if (!function_exists("wikilink")) {
     function wikilink($title) {
+        $slug = str_slug($title);
+
         $url = str_replace("//", "/", 
-            config("wiki-lite.base") . "/view/" . str_slug($title)
+            config("wiki-lite.base") . "/view/" . $slug
         );
 
-        return "[$title]($url)";
+        $class = 'wikilink';
+        if (!Page::where('slug', $slug)->exists()) {
+            $class .= ' wikilink-missing';
+        }
+
+        return "[$title]($url){class='$class'}";
     }
 }
 
