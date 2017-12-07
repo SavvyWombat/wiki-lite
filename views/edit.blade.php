@@ -2,7 +2,7 @@
 
 @section('wiki-content')
 
-@if ($page->title)
+@if ($page->uuid)
     <h1>Editing {{ $page->title }}</h1>
 @else
     <h1>Creating new page</h1>

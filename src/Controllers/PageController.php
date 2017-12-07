@@ -30,11 +30,18 @@ class PageController extends BaseController
 
     public function edit($slug = '')
     {
-        try {
-            $page = Page::revisions($slug)->firstOrFail();
-        } catch (ModelNotFoundException $e) {
+        $page = false;
+        if (!empty($slug)) {
+            try {
+                $page = Page::revisions($slug)->firstOrFail();
+            } catch (ModelNotFoundException $e) {
+                $page = false;
+            }
+        }
+        
+        if (empty($page)) {
             $page = new Page();
-            $page->title = $slug;
+            $page->title = ucfirst(str_replace('-', ' ', $slug));
         }
 
         return view('wiki-lite::edit', [

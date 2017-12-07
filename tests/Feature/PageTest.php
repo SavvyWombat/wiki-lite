@@ -201,8 +201,22 @@ class PageTest extends TestCase
      */
     public function it_loads_an_empty_form_when_creating_new_page()
     {
+        $page = factory(Page::class)->create();
+
         $this->get("/wiki/edit")
             ->assertStatus(200)
             ->assertSee("Creating new page");
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::edit
+     */
+    public function it_suggests_a_title_when_creating_new_page()
+    {
+        $this->get("/wiki/edit/this-page-doesnt-exist-yet")
+            ->assertStatus(200)
+            ->assertSee("Creating new page")
+            ->assertSee("This page doesnt exist yet");
     }
 }
