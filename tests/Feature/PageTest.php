@@ -171,7 +171,8 @@ class PageTest extends TestCase
         $this->get("/wiki/edit/{$page->slug}")
             ->assertStatus(200)
             ->assertSee("Editing " . $page->title)
-            ->assertSee($page->content);
+            ->assertSee($page->content)
+            ->assertSee($page->uuid);
     }
 
     /**
@@ -186,13 +187,13 @@ class PageTest extends TestCase
 
         $secondRevision = factory(Page::class)->make();
         $secondRevision->uuid = $firstRevision->uuid;
-        $secondRevision->title = $firstRevision->title;
         $secondRevision->save();
 
         $this->get("/wiki/edit/{$firstRevision->slug}")
             ->assertStatus(200)
-            ->assertSee("Editing " . $firstRevision->title)
-            ->assertSee($secondRevision->content);
+            ->assertSee("Editing " . $secondRevision->title)
+            ->assertSee($secondRevision->content)
+            ->assertSee($firstRevision->uuid);
     }
 
     /**
@@ -205,7 +206,8 @@ class PageTest extends TestCase
 
         $this->get("/wiki/edit")
             ->assertStatus(200)
-            ->assertSee("Creating new page");
+            ->assertSee("Creating new page")
+            ->assertDontSee($page->uuid);
     }
 
     /**
