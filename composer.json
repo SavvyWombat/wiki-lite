@@ -8,7 +8,8 @@
         "graham-campbell/markdown": "^8.0",
         "webpatser/laravel-uuid": "^3.0",
         "webuni/commonmark-attributes-extension": "^0.5.0",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "sebastian/diff": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
