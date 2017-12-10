@@ -1,4 +1,4 @@
-@extends("wiki-lite::layout")
+@extends("wiki-lite::_layout")
 
 @section('wiki-content')
 
@@ -7,7 +7,5 @@
 <a href="{{ route('wiki-lite.edit', $page->slug) }}">Edit</a>
 
 {!! Markdown::convertToHtml(wikilinks($page->content)) !!}
-
-@include('wiki-lite::_pagelist', [ 'pages' => $page->pages ])
 
 @endsection
