@@ -2,10 +2,15 @@
 
 @section('wiki-content')
 
-<h1>{{ $page->title }}</h1>
+<article class="wiki">
+    <h1>{{ $page->title }}</h1>
 
-<a href="{{ route('wiki-lite.edit', $page->slug) }}">Edit</a>
+    <nav>
+        <a href="{{ route('wiki-lite.edit', $page->slug) }}">Edit</a>
+        <a href="{{ route('wiki-lite.revisions', $page->slug) }}">History</a>
+    </nav>
 
-{!! Markdown::convertToHtml(wikilinks($page->content)) !!}
+    {!! Markdown::convertToHtml(wikilinks($page->content)) !!}
 
+</article>
 @endsection
