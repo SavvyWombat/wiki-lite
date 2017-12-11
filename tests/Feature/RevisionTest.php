@@ -18,14 +18,25 @@ class RevisionTest extends TestCase
      */
     public function it_lists_the_revisions()
     {
-        $page = factory(Page::class)->create();
+        $first = factory(Page::class)->create();
 
-        $this->get("/wiki/view/{$page->slug}/revisions")
+        $second = factory(Page::class)->make();
+        $second->uuid = $first->uuid;
+        $second->save();
+
+        $third = factory(Page::class)->make();
+        $third->uuid = $first->uuid;
+        $third->save();
+
+        $this->get("/wiki/view/{$first->slug}/revisions")
             ->assertStatus(200)
-            ->assertSee("Revision history for: ")
-            ->assertSee($page->title)
-            ->assertDontSee($page->content)
-            ->assertSee($page->updated_at->toDateTimeString());
+            ->assertSee("Revision history for: {$third->title}")
+            ->assertDontSee($first->content)
+            ->assertSee($first->updated_at->toDateTimeString())
+            ->assertDontSee($second->content)
+            ->assertSee($second->updated_at->toDateTimeString())
+            ->assertDontSee($third->content)
+            ->assertSee($third->updated_at->toDateTimeString());
     }
 
     /**
