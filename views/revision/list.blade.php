@@ -6,7 +6,10 @@
 
 <ul>
     @foreach ($revisions as $revision)
-        <li>{{ $revision->updated_at->toDateTimeString() }}</li>
+        <li>
+            {{ $revision->updated_at->toDateTimeString() }}
+            {{ $revision->title }}
+        </li>
     @endforeach
 </ul>
 

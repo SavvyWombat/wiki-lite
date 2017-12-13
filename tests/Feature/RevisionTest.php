@@ -34,8 +34,10 @@ class RevisionTest extends TestCase
             ->assertDontSee($first->content)
             ->assertSee($first->updated_at->toDateTimeString())
             ->assertDontSee($second->content)
+            ->assertSee($second->title)
             ->assertSee($second->updated_at->toDateTimeString())
             ->assertDontSee($third->content)
+            ->assertSee($third->title)
             ->assertSee($third->updated_at->toDateTimeString());
     }
 
