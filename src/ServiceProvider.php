@@ -17,7 +17,7 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/wiki-lite.php' => config_path('wiki-lite.php'),
-            __DIR__ . '/../views/layout.blade.php' => resource_path('views/vendor/wiki-lite/layout.blade.php'),
+            __DIR__ . '/../views/_layout.blade.php' => resource_path('views/vendor/wiki-lite/_layout.blade.php'),
             __DIR__ . '/../database/migrations/' => database_path('migrations'),
         ]);
 
