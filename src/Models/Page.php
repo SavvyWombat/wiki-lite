@@ -4,6 +4,7 @@ namespace SavvyWombat\WikiLite\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use SebastianBergmann\Diff\Differ;
 use Webpatser\Uuid\Uuid;
 
 class Page extends Model
@@ -105,5 +106,14 @@ class Page extends Model
         if (!isset($this->attributes['uuid']) || is_null($this->attributes['uuid'])) {
             $this->attributes['uuid'] = $uuid;
         }
+    }
+
+
+
+    public function diff(Page $newPage)
+    {
+        $differ = new Differ();
+
+        return $differ->diff($this->content, $newPage->content);
     }
 }

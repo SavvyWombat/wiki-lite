@@ -1,8 +1,8 @@
-<form role="form" method="POST" action="{{ route('wiki-lite.save') }}">
+<form method="POST" action="{{ route('wiki-lite.save') }}">
     {{ csrf_field() }}
 
     @if ($page->uuid)
-        <input type="hidden" name="uuid" value="{{ $page->uuid }}" />
+        <input type="hidden" name="uuid" value="{{ $page->uuid }}">
     @endif
 
     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -37,6 +37,6 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" name="save" class="button button-primary" value="Save" />
+        <input type="submit" name="save" class="button button-primary" value="Save page" />
     </div>
 </form>

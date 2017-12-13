@@ -7,6 +7,7 @@ use SavvyWombat\WikiLite\Models\Page;
 /**
  * @uses SavvyWombat\WikiLite\Models\Page
  * @uses SavvyWombat\WikiLite\ServiceProvider
+ * @uses \wikilinks
  * @uses \wikilink
  */
 class PageTest extends TestCase
@@ -14,8 +15,6 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
-     * @uses \wikilinks
-     * @uses \wikilink
      */
     public function it_presents_the_requested_page()
     {
@@ -30,8 +29,6 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
-     * @uses \wikilinks
-     * @uses \wikilink
      */
     public function it_presents_a_404_for_missing_pages()
     {
@@ -44,8 +41,6 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
-     * @uses \wikilinks
-     * @uses \wikilink
      */
     public function it_gets_the_latest_revision_of_the_page()
     {
@@ -65,8 +60,6 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
-     * @uses \wikilinks
-     * @uses \wikilink
      */
     public function it_gets_the_latest_revision_of_the_page_for_an_old_slug()
     {
@@ -178,8 +171,6 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::edit
-     * @uses \wikilinks
-     * @uses \wikilink
      */
     public function it_loads_the_latest_revision_for_editing()
     {
@@ -189,10 +180,14 @@ class PageTest extends TestCase
         $secondRevision->uuid = $firstRevision->uuid;
         $secondRevision->save();
 
+        $thirdRevision = factory(Page::class)->make();
+        $thirdRevision->uuid = $firstRevision->uuid;
+        $thirdRevision->save();        
+
         $this->get("/wiki/edit/{$firstRevision->slug}")
             ->assertStatus(200)
-            ->assertSee("Editing " . $secondRevision->title)
-            ->assertSee($secondRevision->content)
+            ->assertSee("Editing " . $thirdRevision->title)
+            ->assertSee($thirdRevision->content)
             ->assertSee($firstRevision->uuid);
     }
 

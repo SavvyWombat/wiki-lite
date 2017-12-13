@@ -1,4 +1,4 @@
-@extends("wiki-lite::layout")
+@extends("wiki-lite::_layout")
 
 @section('wiki-content')
 
