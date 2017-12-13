@@ -4,6 +4,7 @@ namespace SavvyWombat\WikiLite\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use SavvyWombat\WikiLite\Models\Page;
+use Illuminate\Http\Request;
 
 class RevisionController extends BaseController
 {
@@ -49,7 +50,18 @@ class RevisionController extends BaseController
             'page' => $page,
             'before' => $before,
             'after' => $after,
-            'diff' => $before->diff($after),
+            'diff' => $after->diff($before),
+        ]);
+    }
+
+
+
+    public function diffPost(Request $request)
+    {
+        return redirect()->route('wiki-lite.diff', [
+            'slug' => $request->input('slug'),
+            'from' => $request->input('from'),
+            'to' => $request->input('to'),
         ]);
     }
 }

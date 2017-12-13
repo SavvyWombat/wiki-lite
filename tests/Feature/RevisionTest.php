@@ -57,7 +57,7 @@ class RevisionTest extends TestCase
         $latest->uuid = $before->uuid;
         $latest->save();
 
-        $this->get("/wiki/view/{$before->slug}/diff/{$before->revision}/{$after->revision}")
+        $this->get("/wiki/view/{$before->slug}/diff/{$after->revision}/{$before->revision}")
             ->assertStatus(200)
             ->assertSee("Comparing {$latest->title}")
             ->assertSee($before->title)
@@ -68,5 +68,20 @@ class RevisionTest extends TestCase
             ->assertSee("+++ New")
             ->assertSee("-{$before->content}")
             ->assertSee("+{$after->content}");
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\RevisionController::diffPost
+     */
+    public function it_redirects_from_post_to_get()
+    {
+        $this->post("/wiki/diff", [
+                'slug' => 'some-slug',
+                'from' => 10,
+                'to' => 1701,
+            ])
+            ->assertStatus(302)
+            ->assertRedirect('/wiki/view/some-slug/diff/10/1701');
     }
 }

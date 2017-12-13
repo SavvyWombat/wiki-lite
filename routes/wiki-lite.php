@@ -45,6 +45,11 @@ Route::group(
         Route::get('/view/{slug}/diff/{from}/{to}', [
             'as' => 'wiki-lite.diff',
             'uses' => 'RevisionController@diff',
-        ]);        
+        ]);
+
+        Route::post('/diff', [
+            'as' => 'wiki-lite.diff-post',
+            'uses' => 'RevisionController@diffPost',
+        ]);
     }
 );
