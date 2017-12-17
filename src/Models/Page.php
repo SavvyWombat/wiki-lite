@@ -10,18 +10,18 @@ use Webpatser\Uuid\Uuid;
 class Page extends Model
 {
     /**
-     * Specifies the tables primary key column. Assumes `id` if not set
-     *
-     * @var string
-     */
-    protected $primaryKey = 'revision';
-
-    /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
     protected $dates = [ 'updated_at' ];
+
+    /**
+     * Specifies the tables primary key column. Assumes `id` if not set
+     *
+     * @var string
+     */
+    protected $primaryKey = 'revision';
 
     /**
      * The table associated with the model.
@@ -57,6 +57,75 @@ class Page extends Model
             // this is because we are really creating the revision of a page
             $model->updated_at = Carbon::now()->toDateTimeString();
         });
+
+        static::saving(function($model) {
+            // extract any wiki links from the content
+            $links = $model->links();
+
+            LinkBack::where('source_uuid', $model->uuid)->delete();
+
+            foreach ($links as $slug => $title) {
+                $linkback = new LinkBack();
+                $linkback->source_uuid = $model->uuid;
+                $linkback->slug = $slug;
+                $linkback->save();
+            }
+        });
+    }
+
+
+
+    /**
+     * Get a unified diff of the content comparing this page with a newer one
+     *
+     * @param \SavvyWombat\WikiLite\Models\Page $newPage
+     * @return string
+     */
+    public function diff(Page $newPage)
+    {
+        $differ = new Differ();
+
+        return $differ->diff($this->content, $newPage->content);
+    }
+
+
+
+    /**
+     * Get a list of pages which link back to this page
+     */
+    public function linkbacks()
+    {
+        return $this->hasMany(LinkBack::class, 'target_uuid', 'uuid');
+    }
+
+    /**
+     * Get a list of pages which this page links to
+     */
+    public function linkouts()
+    {
+        return $this->hasMany(LinkBack::class, 'source_uuid', 'uuid');
+    }
+
+    /**
+     * Extract the links from the
+     */
+    public function links()
+    {
+        $wikilinks = [];
+        preg_match_all("#\[\[(.*)\]\]#U",
+            $this->content,
+            $wikilinks,
+            PREG_SET_ORDER
+        );
+
+        $links = [];
+        foreach ($wikilinks as $wikilink) {
+            if (isset($wikilink[1])) {
+                $links[str_slug($wikilink[1])] = $wikilink[1];
+            }
+        }
+
+        return $links;
     }
 
 
@@ -106,14 +175,5 @@ class Page extends Model
         if (!isset($this->attributes['uuid']) || is_null($this->attributes['uuid'])) {
             $this->attributes['uuid'] = $uuid;
         }
-    }
-
-
-
-    public function diff(Page $newPage)
-    {
-        $differ = new Differ();
-
-        return $differ->diff($this->content, $newPage->content);
     }
 }

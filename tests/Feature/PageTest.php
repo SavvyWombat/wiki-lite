@@ -5,6 +5,7 @@ namespace SavvyWombat\WikiLite\Tests\Feature;
 use SavvyWombat\WikiLite\Models\Page;
 
 /**
+ * @uses SavvyWombat\WikiLite\Models\LinkBack
  * @uses SavvyWombat\WikiLite\Models\Page
  * @uses SavvyWombat\WikiLite\ServiceProvider
  * @uses \wikilinks
@@ -152,6 +153,31 @@ class PageTest extends TestCase
             ->assertRedirect('/wiki/edit')
             ->assertSessionHasErrors(['title', 'content']);
     }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function it_saves_the_links_in_the_linkback_table()
+    {
+        $page = factory(Page::class)->create();
+
+        $this->post('/wiki/save', [
+                'uuid' => $page->uuid,
+                'title' => 'This page has links',
+                'content' => 'This [[links to somewhere else]]',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect('/wiki/view/this-page-has-links');
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $page->uuid,
+            'slug' => "links-to-somewhere-else",
+        ]);
+    }
+
+
 
     /**
      * @test

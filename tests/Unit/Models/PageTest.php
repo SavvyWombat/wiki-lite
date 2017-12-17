@@ -10,7 +10,7 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Models\Page::setTitleAttribute
-     * @uses SavvyWombat\WikiLite\Models\Page::boot
+     * @uses SavvyWombat\WikiLite\Models\Page
      */
     public function it_sets_the_slug_when_it_gets_a_title()
     {
@@ -34,7 +34,7 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Models\Page::setUuidAttribute
-     * @uses SavvyWombat\WikiLite\Models\Page::boot
+     * @uses SavvyWombat\WikiLite\Models\Page
      */
     public function it_does_not_allow_uuid_to_be_modified()
     {
@@ -46,6 +46,28 @@ class PageTest extends TestCase
         $this->assertEquals(
             "123456",
             $page->uuid
+        );
+    }
+
+
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Models\Page::links
+     * @uses SavvyWombat\WikiLite\Models\Page
+     */
+    public function it_can_extract_wiki_links()
+    {
+        $page = new Page();
+
+        $page->content = "This is the content, and this is [[a link]], and this is [[another link]]";
+
+        $this->assertEquals(
+            [
+                "a-link" => "a link",
+                "another-link" => "another link",
+            ],
+            $page->links()
         );
     }
 }
