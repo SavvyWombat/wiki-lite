@@ -73,6 +73,7 @@ class Page extends Model
         return $query->where(function($query) use ($slug) {
             if (!empty($slug)) {
                 $uuid = Page::where('slug', $slug)
+                    ->orderBy('revision', 'desc')
                     ->firstOrFail()
                     ->uuid;
 

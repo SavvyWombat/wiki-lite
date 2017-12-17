@@ -75,6 +75,24 @@ class PageTest extends TestCase
             ->assertSee($secondRevision->content);
     }
 
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+    */
+    public function it_gets_newest_page_with_the_same_slug()
+    {
+        $firstPage = factory(Page::class)->create();
+
+        $secondPage = factory(Page::class)->make();
+        $secondPage->title = $firstPage->title;
+        $secondPage->save();
+
+        $this->get("/wiki/view/{$firstPage->slug}")
+            ->assertStatus(200)
+            ->assertSee($secondPage->content)
+            ->assertDontSee($firstPage->content);
+    }
+
 
 
     /**
@@ -215,5 +233,5 @@ class PageTest extends TestCase
             ->assertStatus(200)
             ->assertSee("Creating new page")
             ->assertSee("This page doesnt exist yet");
-    }
+    } 
 }
