@@ -34,6 +34,7 @@ class SavePage extends FormRequest
         return [
             'title' => [
                 'required',
+                Rule::unique('wiki_lite_pages')->ignore($this->input('uuid'), 'uuid'),
             ],
             'content' => [
                 'required',
@@ -54,6 +55,7 @@ class SavePage extends FormRequest
     {
         return [
             'title.required' => 'All pages must have a unique title',
+            'title.exists' => 'All pages must have a unique title',
             'content.required' => 'A wiki page must have content',
             'uuid.regex' => 'Valid UUID for the page most be provided',
         ];

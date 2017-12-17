@@ -173,6 +173,28 @@ class PageTest extends TestCase
 
     /**
      * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @covers SavvyWombat\WikiLite\Requests\SavePage::rules
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function it_returns_errors_if_an_existing_title_is_used()
+    {
+        $firstPage = factory(Page::class)->create();
+
+        $this->post('/wiki/save', [
+            'content' => 'stuff',
+            'title' => $firstPage->title,
+        ])
+        ->assertRedirect('/wiki/edit')
+        ->assertSessionHasErrors(['title']);
+    }
+
+
+
+
+
+    /**
+     * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::edit
      */
     public function it_loads_existing_data_in_the_edit_form()
