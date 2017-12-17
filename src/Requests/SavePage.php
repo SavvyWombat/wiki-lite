@@ -3,6 +3,7 @@
 namespace SavvyWombat\WikiLite\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use SavvyWombat\WikiLite\Rules\Slug;
 use Illuminate\Validation\Rule;
 
 class SavePage extends FormRequest
@@ -34,7 +35,7 @@ class SavePage extends FormRequest
         return [
             'title' => [
                 'required',
-                Rule::unique('wiki_lite_pages')->ignore($this->input('uuid'), 'uuid'),
+                new Slug($this->input('uuid')),
             ],
             'content' => [
                 'required',
