@@ -8,6 +8,7 @@ use SavvyWombat\WikiLite\Models\Page;
 /**
  * @uses SavvyWombat\WikiLite\Models\LinkBack
  * @uses SavvyWombat\WikiLite\Models\Page
+ * @uses SavvyWombat\WikiLite\Rules\Slug
  * @uses SavvyWombat\WikiLite\ServiceProvider
  * @uses \wikilinks
  * @uses \wikilink
@@ -74,6 +75,24 @@ class PageTest extends TestCase
             ->assertStatus(200)
             ->assertSee($secondRevision->title)
             ->assertSee($secondRevision->content);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     */
+    public function it_gets_newest_page_with_the_same_slug()
+    {
+        $firstPage = factory(Page::class)->create();
+
+        $secondPage = factory(Page::class)->make();
+        $secondPage->title = $firstPage->title;
+        $secondPage->save();
+
+        $this->get("/wiki/view/{$firstPage->slug}")
+            ->assertStatus(200)
+            ->assertSee($secondPage->content)
+            ->assertDontSee($firstPage->content);
     }
 
     /**
@@ -181,6 +200,25 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @covers SavvyWombat\WikiLite\Requests\SavePage::rules
+     * @covers SavvyWombat\WikiLite\Rules\Slug::passes
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function it_returns_errors_if_an_existing_title_is_used()
+    {
+        $firstPage = factory(Page::class)->create();
+
+        $this->post('/wiki/save', [
+            'content' => 'stuff',
+            'title' => $firstPage->title,
+        ])
+        ->assertRedirect('/wiki/edit')
+        ->assertSessionHasErrors(['title']);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
     public function it_saves_the_links_in_the_linkback_table()
@@ -206,6 +244,28 @@ class PageTest extends TestCase
     }
 
     /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @covers SavvyWombat\WikiLite\Requests\SavePage::rules
+     * @covers SavvyWombat\WikiLite\Rules\Slug::passes
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function it_returns_errors_if_similar_titles_have_same_slug()
+    {
+        $firstPage = factory(Page::class)->make();
+        $firstPage->title = "Punctuation doesn't exist in slugs";
+        $firstPage->save();
+
+        $this->post('/wiki/save', [
+            'content' => 'stuff',
+            'title' => "punctuation. doesnt exist in slugs",
+        ])
+        ->assertRedirect('/wiki/edit')
+        ->assertSessionHasErrors(['title']);
+    }
+
+
+    /*
      * @test
      * @covers SavvyWombat\WikiLite\Models\Page::saving
      */
@@ -296,5 +356,5 @@ class PageTest extends TestCase
             ->assertStatus(200)
             ->assertSee("Creating new page")
             ->assertSee("This page doesnt exist yet");
-    }
+    } 
 }

@@ -3,6 +3,7 @@
 namespace SavvyWombat\WikiLite\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use SavvyWombat\WikiLite\Rules\Slug;
 use Illuminate\Validation\Rule;
 
 class SavePage extends FormRequest
@@ -34,6 +35,7 @@ class SavePage extends FormRequest
         return [
             'title' => [
                 'required',
+                new Slug($this->input('uuid')),
             ],
             'content' => [
                 'required',
@@ -54,6 +56,7 @@ class SavePage extends FormRequest
     {
         return [
             'title.required' => 'All pages must have a unique title',
+            'title.exists' => 'All pages must have a unique title',
             'content.required' => 'A wiki page must have content',
             'uuid.regex' => 'Valid UUID for the page most be provided',
         ];
