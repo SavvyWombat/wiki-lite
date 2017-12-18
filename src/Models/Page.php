@@ -48,7 +48,7 @@ class Page extends Model
     {
         parent::boot();
 
-        static::creating(function($model) {
+        static::saving(function($model) {
             // enforce uuid on new pages
             if (is_null($model->uuid)) {
                 $model->uuid = Uuid::generate(4)->string;
@@ -56,9 +56,7 @@ class Page extends Model
             // enforce updated_at date to be now
             // this is because we are really creating the revision of a page
             $model->updated_at = Carbon::now()->toDateTimeString();
-        });
 
-        static::saving(function($model) {
             // extract any wiki links from the content
             $links = $model->links();
 
