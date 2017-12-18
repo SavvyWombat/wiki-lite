@@ -19,6 +19,7 @@
     },
     "autoload": {
         "classmap": [
+            "database/factories",
             "database/migrations"
         ],
         "files": [
