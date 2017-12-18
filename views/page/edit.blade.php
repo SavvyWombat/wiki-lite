@@ -1,7 +1,7 @@
 @extends("wiki-lite::_layout")
 
 @section('wiki-content')
-<article class="wiki-lite wiki-lite-edit"
+<article class="wiki-lite wiki-lite-edit">
     @if ($page->uuid)
         <h1>Editing {{ $page->title }}</h1>
     @else
