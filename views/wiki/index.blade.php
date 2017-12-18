@@ -1,8 +1,9 @@
 @extends("wiki-lite::_layout")
 
 @section('wiki-content')
-<h1>WikiLite</h1>
+<article class="wiki-lite wiki-lite-index">
+    <h1>WikiLite</h1>
 
-@include('wiki-lite::_pagelist')
-
+    @include('wiki-lite::_pagelist')
+</article>
 @endsection

@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('wiki-lite.save') }}">
+<form method="POST" action="{{ route('wiki-lite.save') }}" class="wiki-lite">
     {{ csrf_field() }}
 
     @if ($page->uuid)
