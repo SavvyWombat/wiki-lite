@@ -219,6 +219,7 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @covers SavvyWombat\WikiLite\Models\Page::saving
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
     public function it_saves_the_links_in_the_linkback_table()
@@ -240,6 +241,27 @@ class PageTest extends TestCase
         $this->assertDatabaseHas('wiki_lite_linkbacks', [
             'source_uuid' => $page->uuid,
             'target_slug' => "to-here-too",
+        ]);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @covers SavvyWombat\WikiLite\Models\Page::creating
+     * @covers SavvyWombat\WikiLite\Models\Page::saving
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function it_saves_the_linkback_from_a_new_page()
+    {
+        $this->post('/wiki/save', [
+                'title' => 'This is a new page',
+                'content' => 'This [[links to somewhere else]]',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect('/wiki/view/this-is-a-new-page');
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'target_slug' => "links-to-somewhere-else",
         ]);
     }
 
