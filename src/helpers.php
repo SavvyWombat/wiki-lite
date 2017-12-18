@@ -26,7 +26,7 @@ if (!function_exists("wikilinks")) {
             $content,
             $matches,
             PREG_SET_ORDER
-        );        
+        );
 
         foreach ($matches as $link) {
             $content = str_replace($link[0], 
