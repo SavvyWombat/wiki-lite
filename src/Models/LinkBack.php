@@ -19,4 +19,14 @@ class LinkBack extends Model
      * @var bool
      */
     public $timestamps = false;
+
+
+
+    /**
+     * Page this link back links to
+     */
+    public function sourcePage()
+    {
+        return $this->hasOne(Page::class, "uuid", "source_uuid");
+    }
 }

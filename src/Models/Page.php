@@ -95,6 +95,18 @@ class Page extends Model
         return $differ->diff($this->content, $newPage->content);
     }
 
+
+
+    /**
+     * Links back to this page
+     */
+    public function linksBack()
+    {
+        return $this->hasMany(LinkBack::class, "target_slug", "slug");
+    }
+
+
+
     /**
      * Extract the links from the
      */

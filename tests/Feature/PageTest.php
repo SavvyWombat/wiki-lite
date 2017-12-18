@@ -21,7 +21,6 @@ class PageTest extends TestCase
     public function it_presents_the_requested_page()
     {
         $page = factory(Page::class)->create();
-
         $this->get("/wiki/view/{$page->slug}")
             ->assertStatus(200)
             ->assertSee($page->title)
@@ -75,6 +74,30 @@ class PageTest extends TestCase
             ->assertStatus(200)
             ->assertSee($secondRevision->title)
             ->assertSee($secondRevision->content);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     */
+    public function it_gets_the_list_of_link_backs()
+    {
+        $sourcePage = factory(Page::class)->create();
+
+        $targetPage = factory(Page::class)->create();
+
+        $linkBack = factory(LinkBack::class)->make();
+        $linkBack->target_slug = $targetPage->slug;
+        $linkBack->source_uuid = $sourcePage->uuid;
+        $linkBack->save();
+
+        $this->get("/wiki/view/{$targetPage->slug}")
+            ->assertStatus(200)
+            ->assertSee("Pages which link back to this one")
+            ->assertSee(sprintf('<a href="/wiki/view/%s">%s</a>',
+                $sourcePage->slug,
+                $sourcePage->title
+            ));
     }
 
 
