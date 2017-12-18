@@ -2,17 +2,19 @@
 
 @section('wiki-content')
 
-<article class="wiki">
+<article class="wiki-lite wiki-lite-page">
     <h1>{{ $page->title }}</h1>
 
-    <nav>
-        <a href="{{ route('wiki-lite.edit', $page->slug) }}">Edit</a>
-        <a href="{{ route('wiki-lite.revisions', $page->slug) }}">History</a>
+    <nav class="wiki-lite wiki-lite-page-navigation">
+        <ul>
+            <li><a href="{{ route('wiki-lite.edit', $page->slug) }}">Edit</a></li>
+            <li><a href="{{ route('wiki-lite.revisions', $page->slug) }}">History</a></li>
+        </ul>
     </nav>
 
     {!! Markdown::convertToHtml(wikilinks($page->content)) !!}
 
-    <nav class="wiki-link-backs">
+    <nav class="wiki-lite wiki-lite-link-backs">
         <h2>Pages which link back to this one</h2>
 
         <ul>
