@@ -67,8 +67,15 @@ class Page extends Model
             foreach ($links as $slug => $title) {
                 $linkback = new LinkBack();
                 $linkback->source_uuid = $model->uuid;
-                $linkback->slug = $slug;
+                $linkback->target_slug = $slug;
                 $linkback->save();
+            }
+
+            // make sure any linkbacks follow a change in slug
+            $lastRevision = $model->revisions()->first();
+
+            if ($lastRevision && $lastRevision->slug != $model->slug) {
+                LinkBack::where('target_slug', $lastRevision->slug)->update([ "target_slug" => $model->slug, ]);
             }
         });
     }
@@ -86,24 +93,6 @@ class Page extends Model
         $differ = new Differ();
 
         return $differ->diff($this->content, $newPage->content);
-    }
-
-
-
-    /**
-     * Get a list of pages which link back to this page
-     */
-    public function linkbacks()
-    {
-        return $this->hasMany(LinkBack::class, 'target_uuid', 'uuid');
-    }
-
-    /**
-     * Get a list of pages which this page links to
-     */
-    public function linkouts()
-    {
-        return $this->hasMany(LinkBack::class, 'source_uuid', 'uuid');
     }
 
     /**

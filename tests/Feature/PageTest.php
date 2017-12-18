@@ -2,6 +2,7 @@
 
 namespace SavvyWombat\WikiLite\Tests\Feature;
 
+use SavvyWombat\WikiLite\Models\LinkBack;
 use SavvyWombat\WikiLite\Models\Page;
 
 /**
@@ -166,14 +167,45 @@ class PageTest extends TestCase
         $this->post('/wiki/save', [
                 'uuid' => $page->uuid,
                 'title' => 'This page has links',
-                'content' => 'This [[links to somewhere else]]',
+                'content' => 'This [[links to somewhere else]] and [[to here, too]]',
             ])
             ->assertStatus(302)
             ->assertRedirect('/wiki/view/this-page-has-links');
 
         $this->assertDatabaseHas('wiki_lite_linkbacks', [
             'source_uuid' => $page->uuid,
-            'slug' => "links-to-somewhere-else",
+            'target_slug' => "links-to-somewhere-else",
+        ]);
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $page->uuid,
+            'target_slug' => "to-here-too",
+        ]);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Models\Page::saving
+     */
+    public function it_updates_links_when_the_slug_changes()
+    {
+        $page = factory(Page::class)->create();
+
+        $linkback = factory(LinkBack::class)->make();
+        $linkback->target_slug = $page->slug;
+        $linkback->save();
+
+        $revision = factory(Page::class)->make();
+        $revision->uuid = $page->uuid;
+        $revision->save();
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $linkback->source_uuid,
+            'target_slug' => $revision->slug,
+        ]);
+
+        $this->assertDatabaseMissing('wiki_lite_linkbacks', [
+            'source_uuid' => $linkback->source_uuid,
+            'target_slug' => $page->slug,
         ]);
     }
 
