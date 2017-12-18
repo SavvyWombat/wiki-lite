@@ -19,22 +19,4 @@ class LinkBack extends Model
      * @var bool
      */
     public $timestamps = false;
-
-
-
-    /**
-     * Get the page this link targets
-     */
-    public function target()
-    {
-        $this->belongsTo(Page::class, 'uuid', 'target_uuid');
-    }
-
-    /**
-     * Get the page this link can be found on
-     */
-    public function source()
-    {
-        $this->belongsTo(Page::class, 'uuid', 'source_uuid');
-    }
 }

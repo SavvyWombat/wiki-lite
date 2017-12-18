@@ -16,7 +16,7 @@ class CreateLinkbacks extends Migration
         Schema::create('wiki_lite_linkbacks', function(Blueprint $table) {
             $table->increments('id');
             $table->uuid('source_uuid');
-            $table->text('slug');
+            $table->text('target_slug');
         });
     }
 }
