@@ -2,9 +2,11 @@
 
 namespace SavvyWombat\WikiLite\Tests\Feature;
 
+use SavvyWombat\WikiLite\Models\LinkBack;
 use SavvyWombat\WikiLite\Models\Page;
 
 /**
+ * @uses SavvyWombat\WikiLite\Models\LinkBack
  * @uses SavvyWombat\WikiLite\Models\Page
  * @uses SavvyWombat\WikiLite\Rules\Slug
  * @uses SavvyWombat\WikiLite\ServiceProvider
@@ -20,7 +22,6 @@ class PageTest extends TestCase
     public function it_presents_the_requested_page()
     {
         $page = factory(Page::class)->create();
-
         $this->get("/wiki/view/{$page->slug}")
             ->assertStatus(200)
             ->assertSee($page->title)
@@ -79,7 +80,7 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::view
-    */
+     */
     public function it_gets_newest_page_with_the_same_slug()
     {
         $firstPage = factory(Page::class)->create();
@@ -92,6 +93,30 @@ class PageTest extends TestCase
             ->assertStatus(200)
             ->assertSee($secondPage->content)
             ->assertDontSee($firstPage->content);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::view
+     */
+    public function it_gets_the_list_of_link_backs()
+    {
+        $sourcePage = factory(Page::class)->create();
+
+        $targetPage = factory(Page::class)->create();
+
+        $linkBack = factory(LinkBack::class)->make();
+        $linkBack->target_slug = $targetPage->slug;
+        $linkBack->source_uuid = $sourcePage->uuid;
+        $linkBack->save();
+
+        $this->get("/wiki/view/{$targetPage->slug}")
+            ->assertStatus(200)
+            ->assertSee("Pages which link back to this one")
+            ->assertSee(sprintf('<a href="/wiki/view/%s">%s</a>',
+                $sourcePage->slug,
+                $sourcePage->title
+            ));
     }
 
 
@@ -194,6 +219,33 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function it_saves_the_links_in_the_linkback_table()
+    {
+        $page = factory(Page::class)->create();
+
+        $this->post('/wiki/save', [
+                'uuid' => $page->uuid,
+                'title' => 'This page has links',
+                'content' => 'This [[links to somewhere else]] and [[to here, too]]',
+            ])
+            ->assertStatus(302)
+            ->assertRedirect('/wiki/view/this-page-has-links');
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $page->uuid,
+            'target_slug' => "links-to-somewhere-else",
+        ]);
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $page->uuid,
+            'target_slug' => "to-here-too",
+        ]);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @covers SavvyWombat\WikiLite\Requests\SavePage::rules
      * @covers SavvyWombat\WikiLite\Rules\Slug::passes
      * @uses SavvyWombat\WikiLite\Requests\SavePage
@@ -213,6 +265,32 @@ class PageTest extends TestCase
     }
 
 
+    /*
+     * @test
+     * @covers SavvyWombat\WikiLite\Models\Page::saving
+     */
+    public function it_updates_links_when_the_slug_changes()
+    {
+        $page = factory(Page::class)->create();
+
+        $linkback = factory(LinkBack::class)->make();
+        $linkback->target_slug = $page->slug;
+        $linkback->save();
+
+        $revision = factory(Page::class)->make();
+        $revision->uuid = $page->uuid;
+        $revision->save();
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $linkback->source_uuid,
+            'target_slug' => $revision->slug,
+        ]);
+
+        $this->assertDatabaseMissing('wiki_lite_linkbacks', [
+            'source_uuid' => $linkback->source_uuid,
+            'target_slug' => $page->slug,
+        ]);
+    }
 
 
 

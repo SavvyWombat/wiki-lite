@@ -18,12 +18,16 @@
         "orchestra/testbench": "^3.5"
     },
     "autoload": {
-        "psr-4": {
-            "SavvyWombat\\WikiLite\\": "src/"
-        },
+        "classmap": [
+            "database/factories",
+            "database/migrations"
+        ],
         "files": [
             "src/helpers.php"
-        ]
+        ],
+        "psr-4": {
+            "SavvyWombat\\WikiLite\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

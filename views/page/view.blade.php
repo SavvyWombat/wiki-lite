@@ -12,5 +12,15 @@
 
     {!! Markdown::convertToHtml(wikilinks($page->content)) !!}
 
+    <nav class="wiki-link-backs">
+        <h2>Pages which link back to this one</h2>
+
+        <ul>
+            @foreach ($page->linksBack as $linkBack)
+                <li>{!! Markdown::convertToHtml(wikilink($linkBack->sourcePage->title)) !!}</li>
+            @endforeach
+        </ul>
+    </nav>
+
 </article>
 @endsection
