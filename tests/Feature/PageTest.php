@@ -113,7 +113,7 @@ class PageTest extends TestCase
         $this->get("/wiki/view/{$targetPage->slug}")
             ->assertStatus(200)
             ->assertSee("Pages which link back to this one")
-            ->assertSee(sprintf('<a href="/wiki/view/%s">%s</a>',
+            ->assertSee(sprintf('<a href="http://localhost/wiki/view/%s">%s</a>',
                 $sourcePage->slug,
                 $sourcePage->title
             ));
