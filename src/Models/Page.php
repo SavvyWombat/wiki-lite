@@ -4,6 +4,7 @@ namespace SavvyWombat\WikiLite\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use SebastianBergmann\Diff\Differ;
 use Webpatser\Uuid\Uuid;
 
@@ -63,6 +64,7 @@ class Page extends Model
             LinkBack::where('source_uuid', $model->uuid)->delete();
 
             foreach ($links as $slug => $title) {
+
                 $linkback = new LinkBack();
                 $linkback->source_uuid = $model->uuid;
                 $linkback->target_slug = $slug;
@@ -70,10 +72,14 @@ class Page extends Model
             }
 
             // make sure any linkbacks follow a change in slug
-            $lastRevision = $model->revisions()->first();
+            try {
+                $lastRevision = $model->revisions($model->slug)->first();
 
-            if ($lastRevision && $lastRevision->slug != $model->slug) {
-                LinkBack::where('target_slug', $lastRevision->slug)->update([ "target_slug" => $model->slug, ]);
+                if ($lastRevision && $lastRevision->slug != $model->slug) {
+                    LinkBack::where('target_slug', $lastRevision->slug)->update([ "target_slug" => $model->slug, ]);
+                }
+            } catch(ModelNotFoundException $e) {
+                // Nothing to do
             }
         });
     }
