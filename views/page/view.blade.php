@@ -19,7 +19,7 @@
 
         <ul>
             @foreach ($page->linksBack as $linkBack)
-                <li>{!! Markdown::convertToHtml(wikilink($linkBack->sourcePage->title)) !!}</li>
+                <li><a href="{{ route('wiki-lite.view', $linkBack->sourcePage->slug) }}">{{$linkBack->sourcePage->title}}</a></li>
             @endforeach
         </ul>
     </nav>
