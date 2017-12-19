@@ -219,6 +219,27 @@ class PageTest extends TestCase
     /**
      * @test
      * @covers SavvyWombat\WikiLite\Controllers\PageController::save
+     * @covers SavvyWombat\WikiLite\Requests\SavePage::rules
+     * @covers SavvyWombat\WikiLite\Rules\Slug::passes
+     * @uses SavvyWombat\WikiLite\Requests\SavePage
+     */
+    public function it_returns_errors_if_similar_titles_have_same_slug()
+    {
+        $firstPage = factory(Page::class)->make();
+        $firstPage->title = "Punctuation doesn't exist in slugs";
+        $firstPage->save();
+
+        $this->post('/wiki/save', [
+            'content' => 'stuff',
+            'title' => "punctuation. doesnt exist in slugs",
+        ])
+        ->assertRedirect('/wiki/edit')
+        ->assertSessionHasErrors(['title']);
+    }
+
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
      * @covers SavvyWombat\WikiLite\Models\Page::saving
      * @uses SavvyWombat\WikiLite\Requests\SavePage
      */
@@ -265,28 +286,6 @@ class PageTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @covers SavvyWombat\WikiLite\Controllers\PageController::save
-     * @covers SavvyWombat\WikiLite\Requests\SavePage::rules
-     * @covers SavvyWombat\WikiLite\Rules\Slug::passes
-     * @uses SavvyWombat\WikiLite\Requests\SavePage
-     */
-    public function it_returns_errors_if_similar_titles_have_same_slug()
-    {
-        $firstPage = factory(Page::class)->make();
-        $firstPage->title = "Punctuation doesn't exist in slugs";
-        $firstPage->save();
-
-        $this->post('/wiki/save', [
-            'content' => 'stuff',
-            'title' => "punctuation. doesnt exist in slugs",
-        ])
-        ->assertRedirect('/wiki/edit')
-        ->assertSessionHasErrors(['title']);
-    }
-
-
     /*
      * @test
      * @covers SavvyWombat\WikiLite\Models\Page::saving
@@ -314,6 +313,37 @@ class PageTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     * @covers SavvyWombat\WikiLite\Models\Page::saving
+     */
+    public function it_only_updates_links_when_it_is_supposed_to()
+    {
+        $firstPage = factory(Page::class)->create();
+
+        $secondPage = factory(Page::class)->make();
+        $secondPage->content = "[[{$firstPage->title}]]";
+        $secondPage->save();
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $secondPage->uuid,
+            'target_slug' => $firstPage->slug,
+        ]);
+
+        $thirdPage = factory(Page::class)->make();
+        $thirdPage->content = "[[{$secondPage->title}]]";
+        $thirdPage->save();
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $secondPage->uuid,
+            'target_slug' => $firstPage->slug,
+        ]);
+
+        $this->assertDatabaseHas('wiki_lite_linkbacks', [
+            'source_uuid' => $thirdPage->uuid,
+            'target_slug' => $secondPage->slug,
+        ]);
+    }
 
 
     /**
