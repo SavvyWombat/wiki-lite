@@ -1,10 +1,10 @@
 {
     "name": "savvywombat/wiki-lite",
-    "description": "Wiki-Lite: light weight wiki",
-    "keywords": ["wiki", "savvywombat", "lite", "light"],
+    "description": "Wiki-Lite: light weight wiki for Laravel 5",
+    "keywords": ["wiki", "savvywombat", "savvy wombat", "wiki-lite", "wikilite", "wiki lite", "laravel"],
     "license": "MIT",
-    "type": "project",
     "require": {
+        "php5": "^7.0",
         "graham-campbell/markdown": "^8.0",
         "webpatser/laravel-uuid": "^3.0",
         "webuni/commonmark-attributes-extension": "^0.5.0",
