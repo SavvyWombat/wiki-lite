@@ -8,6 +8,14 @@ In your Laravel 5 application, install using [Composer](https://getcomposer.org/
 
     composer require savvywombat/wiki-lite
 
+You will need to publish the package:
+
+    artisan vendor:publish
+
+And select:
+
+    SavvyWombat\WikiLite\ServiceProvider
+
 ### Configuration
 
 A sample configuration is provided in `config/wiki-lite.php`
