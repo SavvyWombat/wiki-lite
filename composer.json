@@ -1,8 +1,16 @@
 {
     "name": "savvywombat/wiki-lite",
     "description": "Wiki-Lite: light weight wiki for Laravel 5",
+    "type": "project",
+    "homepage": "https://github.com/SavvyWombat/wiki-lite",
     "keywords": ["wiki", "savvywombat", "savvy wombat", "wiki-lite", "wikilite", "wiki lite", "laravel"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Stuart Jones",
+            "email": "stuart@savvywombat.com.au",
+        }
+    ],
     "require": {
         "php5": "^7.0",
         "graham-campbell/markdown": "^8.0",
