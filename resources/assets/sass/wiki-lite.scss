@@ -1,0 +1,46 @@
+nav.wiki-lite-link-backs {
+    border-top: 1px solid $color-primary;
+}
+
+article.wiki-lite {
+    border-bottom: 5px solid $color-secondary;
+    margin-bottom: 1em;
+
+    p {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+}
+
+ul.wiki-lite-revision-list {
+    li {
+        display: grid;
+        grid-template-columns: 5em 5em 10em auto;
+
+        span {
+            grid-column-start: span 1;
+        }
+    }
+}
+
+div.wiki-lite-diff-header {
+    margin-top: 0.5em;
+    border-top: 1px solid $color-primary;
+    padding-top: 0.5em;
+}
+
+ul.wiki-lite-diff-item {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    li {
+        grid-column-start: span 1;
+        text-align: center;
+    }
+}
+
+pre.wiki-lite-diff {
+    margin-top: 0.5em;
+    border-top: 1px solid $color-primary;
+    padding-top: 0.5em;
+}
