@@ -1,3 +1,36 @@
+.wikilink {
+    color: #000099;
+    border-bottom: 1px dashed #000099;
+
+    &:hover {
+        color: #999999;
+        border-color: #999999;
+    }
+}
+
+.wikilink-missing {
+    color: #990000;
+    border-color: #990000;
+}
+
+nav.wiki-lite {
+    li {
+        margin: 0.5em;
+        display: inline-block;
+    }
+
+    a {
+        display: block;
+        padding: 0.5em;
+    }
+
+    a:hover {
+        padding: calc(0.5em - 1px);
+        border: 1px solid $color-primary-light;
+        background-color: $color-background-panel;
+    }
+}
+
 nav.wiki-lite-link-backs {
     border-top: 1px solid $color-primary;
 }
