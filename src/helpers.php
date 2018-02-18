@@ -10,9 +10,9 @@ if (!function_exists("wikilink")) {
             config("wiki-lite.base") . "/view/" . $slug
         );
 
-        $class = 'wikilink';
+        $class = 'wiki-lite-wikilink';
         if (!Page::where('slug', $slug)->exists()) {
-            $class .= ' wikilink-missing';
+            $class .= ' wiki-lite-wikilink-missing';
         }
 
         return "[$title]($url){class='$class'}";

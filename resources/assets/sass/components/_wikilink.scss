@@ -1,0 +1,15 @@
+a.wiki-lite-wikilink {
+    color: $wiki-lite-link-color;
+    border-bottom: 1px dashed $wiki-lite-link-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $wiki-lite-link-color-hover;
+        border-color: $wiki-lite-link-color-hover;
+    }
+}
+
+a.wiki-lite-wikilink-missing {
+    color: $wiki-lite-link-color-missing;
+    border-color: $wiki-lite-link-color-missing;
+}
