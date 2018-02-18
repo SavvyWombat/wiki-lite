@@ -1,4 +1,4 @@
-@extends("wiki-lite::_layout")
+@extends("savvywombat/wiki-lite::_layout")
 
 @section('wiki-content')
 <article class="wiki-lite wiki-lite-history">

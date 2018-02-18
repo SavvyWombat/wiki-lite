@@ -16,12 +16,12 @@ class RevisionController extends BaseController
             $page = new Page();
             $page->title = $slug;
 
-            return response()->view('wiki-lite::page.missing', [
+            return response()->view('savvywombat/wiki-lite::page.missing', [
                 'page' => $page,
             ], 404);
         }
 
-        return response()->view('wiki-lite::revision.list', [
+        return response()->view('savvywombat/wiki-lite::revision.list', [
             'page' => $page,
             'revisions' => Page::revisions($slug)->get(),
         ]);
@@ -37,7 +37,7 @@ class RevisionController extends BaseController
             $page = new Page();
             $page->title = $slug;
 
-            return response()->view('wiki-lite::page.missing', [
+            return response()->view('savvywombat/wiki-lite::page.missing', [
                 'page' => $page,
             ], 404);
         }
@@ -46,7 +46,7 @@ class RevisionController extends BaseController
         $after = Page::where('revision', $to)->firstOrFail();
 
 
-        return response()->view('wiki-lite::revision.diff', [
+        return response()->view('savvywombat/wiki-lite::revision.diff', [
             'page' => $page,
             'before' => $before,
             'after' => $after,

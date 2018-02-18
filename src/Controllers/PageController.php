@@ -18,12 +18,12 @@ class PageController extends BaseController
             $page = new Page();
             $page->title = $slug;
 
-            return response()->view('wiki-lite::page.missing', [
+            return response()->view('savvywombat/wiki-lite::page.missing', [
                 'page' => $page,
             ], 404);
         }
 
-        return view('wiki-lite::page.view', [
+        return view('savvywombat/wiki-lite::page.view', [
             'page' => $page,
         ]);
     }
@@ -44,7 +44,7 @@ class PageController extends BaseController
             $page->title = ucfirst(str_replace('-', ' ', $slug));
         }
 
-        return view('wiki-lite::page.edit', [
+        return view('savvywombat/wiki-lite::page.edit', [
             'page' => $page,
         ]);
     }
