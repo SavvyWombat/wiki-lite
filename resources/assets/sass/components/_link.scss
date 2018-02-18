@@ -1,0 +1,15 @@
+div.wiki-lite-content a {
+    margin-right: 0.25em;
+}
+
+div.wiki-lite-content a::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+
+    background-image: url(/images/vendor/savvywombat/wiki-lite/ui/external-link-icon.svg);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: 0.25em 0.5em;
+}

@@ -1,0 +1,9 @@
+%textarea {
+    @extend %input;
+    
+    height: 10em;
+}
+
+textarea {
+    @extend %textarea;
+}

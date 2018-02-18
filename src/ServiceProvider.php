@@ -20,6 +20,7 @@ class ServiceProvider extends IlluminateServiceProvider
             __DIR__ . '/../views/_layout.blade.php' => resource_path('views/vendor/savvywombat/wiki-lite/_layout.blade.php'),
             __DIR__ . '/../database/migrations/' => database_path('migrations'),
             __DIR__ . '/../resources/assets/sass/' => resource_path('assets/sass/vendor/savvywombat/wiki-lite'),
+            __DIR__ . '/../resources/images/' => public_path('images/vendor/savvywombat/wiki-lite'),
         ]);
 
 

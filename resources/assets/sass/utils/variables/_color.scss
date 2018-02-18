@@ -16,17 +16,17 @@ $wiki-lite-color-background-panel: #a0bdd6 !default;
 
 /// Default link colors
 $wiki-lite-link-color:          #000099 !default;
-$wiki-lite-link-color-hover:    #999999 !default;
-$wiki-lite-link-color-missing:  #990000 !default;
+$wiki-lite-link-hover:    #999999 !default;
+$wiki-lite-link-missing:  #990000 !default;
 
 /// Inputs
-$input-border-color: $wiki-lite-color-primary !default;
-$input-border-focus: $wiki-lite-color-background-panel !default;
+$wiki-lite-input-border-color: $wiki-lite-color-primary !default;
+$wiki-lite-input-border-focus: #CC6600 !default;
 
 /// Buttons
-$button-color:          $wiki-lite-color-primary-light !default;
-$button-color-primary:  $wiki-lite-color-primary !default;
-$button-color-hover:    $wiki-lite-text-background !default;
+$wiki-lite-button-color:          $wiki-lite-color-primary-light !default;
+$wiki-lite-button-color-primary:  $wiki-lite-color-primary !default;
+$wiki-lite-button-color-hover:    $wiki-lite-text-background !default;
 
 $wiki-lite-text-button:         $wiki-lite-text-color !default;
 $wiki-lite-text-button-primary: $wiki-lite-text-background !default;

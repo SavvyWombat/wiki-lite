@@ -1,0 +1,10 @@
+ul.wiki-lite-revision-list {
+    li {
+        display: grid;
+        grid-template-columns: 5em 5em 10em auto;
+
+        span {
+            grid-column-start: span 1;
+        }
+    }
+}

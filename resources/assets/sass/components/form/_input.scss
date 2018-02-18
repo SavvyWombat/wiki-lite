@@ -1,0 +1,16 @@
+%input {
+    width: 30em;
+    margin: 0.5em 0;
+
+    border: 1px solid $wiki-lite-input-border-color;
+    border-radius: 0.5em;
+    outline: none;
+
+    &:focus {
+        border-color: $wiki-lite-input-border-focus;
+    }
+}
+
+input {
+    @extend %input;
+}

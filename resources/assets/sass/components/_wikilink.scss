@@ -4,12 +4,17 @@ a.wiki-lite-wikilink {
     text-decoration: none;
 
     &:hover {
-        color: $wiki-lite-link-color-hover;
-        border-color: $wiki-lite-link-color-hover;
+        color: $wiki-lite-link-hover;
+        border-color: $wiki-lite-link-hover;
     }
 }
 
 a.wiki-lite-wikilink-missing {
-    color: $wiki-lite-link-color-missing;
-    border-color: $wiki-lite-link-color-missing;
+    color: $wiki-lite-link-missing;
+    border-color: $wiki-lite-link-missing;
+}
+
+div.wiki-lite-content a.wiki-lite-wikilink::after {
+    width: 0;
+    background-image: none;
 }
