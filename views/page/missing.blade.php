@@ -1,4 +1,4 @@
-@extends("wiki-lite::_layout")
+@extends("savvywombat/wiki-lite::_layout")
 
 @section('wiki-content')
 <article class="wiki-lite wiki-lite-not-found">
@@ -8,6 +8,6 @@
         "{{ $page->title }}" doesn't seem to exist. Create a new page?
     </p>
 
-    @include("wiki-lite::_form")
+    @include("savvywombat/wiki-lite::_form")
 </article>
 @endsection

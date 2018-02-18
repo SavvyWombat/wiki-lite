@@ -1,0 +1,21 @@
+nav.wiki-lite {
+    li {
+        margin: 0.5em;
+        display: inline-block;
+    }
+
+    a {
+        display: block;
+        padding: 0.5em;
+    }
+
+    a:hover {
+        padding: calc(0.5em - 1px);
+        border: 1px solid $wiki-lite-color-primary-light;
+        background-color: $wiki-lite-color-background-panel;
+    }
+}
+
+nav.wiki-lite-link-backs {
+    border-top: 1px solid $wiki-lite-color-primary;
+}

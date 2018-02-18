@@ -1,0 +1,33 @@
+/// https://gka.github.io/palettes/#colors=#a02917,#ffffff|steps=7|bez=1|coL=1
+
+/// Savvy blue
+$wiki-lite-color-primary:       #40485c !default;
+$wiki-lite-color-primary-light: #c0d3e4 !default;
+
+/// Wombat red
+$wiki-lite-color-secondary:       #532e1b !default;
+$wiki-lite-color-secondary-light: #a02917 !default;
+
+/// Default text color
+$wiki-lite-text-color:      #333333 !default;
+$wiki-lite-text-background: #fcfcfc !default;
+
+$wiki-lite-color-background-panel: #a0bdd6 !default;
+
+/// Default link colors
+$wiki-lite-link-color:          #000099 !default;
+$wiki-lite-link-hover:    #999999 !default;
+$wiki-lite-link-missing:  #990000 !default;
+
+/// Inputs
+$wiki-lite-input-border-color: $wiki-lite-color-primary !default;
+$wiki-lite-input-border-focus: #CC6600 !default;
+
+/// Buttons
+$wiki-lite-button-color:          $wiki-lite-color-primary-light !default;
+$wiki-lite-button-color-primary:  $wiki-lite-color-primary !default;
+$wiki-lite-button-color-hover:    $wiki-lite-text-background !default;
+
+$wiki-lite-text-button:         $wiki-lite-text-color !default;
+$wiki-lite-text-button-primary: $wiki-lite-text-background !default;
+$wiki-lite-text-button-hover:   $wiki-lite-text-color !default;

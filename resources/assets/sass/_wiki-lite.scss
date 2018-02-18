@@ -1,0 +1,20 @@
+@import "utils/variables/color";
+
+@import "components/form";
+@import "components/diff";
+@import "components/nav";
+@import "components/revisions";
+@import "components/link";
+@import "components/wikilink";
+
+
+
+article.wiki-lite {
+    border-bottom: 5px solid $wiki-lite-color-secondary;
+    margin-bottom: 1em;
+
+    p {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+}

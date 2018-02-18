@@ -1,4 +1,4 @@
-@extends("wiki-lite::_layout")
+@extends("savvywombat/wiki-lite::_layout")
 
 @section('wiki-content')
 <article class="wiki-lite wiki-lite-edit">
@@ -8,6 +8,6 @@
         <h1>Creating new page</h1>
     @endif
 
-    @include("wiki-lite::_form")
+    @include("savvywombat/wiki-lite::_form")
 </article>
 @endsection

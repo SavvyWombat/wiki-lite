@@ -1,0 +1,10 @@
+%button {
+    @extend %input;
+
+    height: 2em;
+    width: auto;
+}
+
+button {
+    @extend %button;
+}

@@ -1,0 +1,11 @@
+%checkbutton {
+    @extend %input;
+    height: 1em;
+    width: 1em;
+    margin: 0.25em 1em;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+    @extend %checkbutton;
+}

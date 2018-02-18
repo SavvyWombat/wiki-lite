@@ -1,4 +1,4 @@
-@extends("wiki-lite::_layout")
+@extends("savvywombat/wiki-lite::_layout")
 
 @section('wiki-content')
 
@@ -12,7 +12,9 @@
         </ul>
     </nav>
 
-    {!! Markdown::convertToHtml(wikilinks($page->content)) !!}
+    <div class="wiki-lite-content">
+        {!! Markdown::convertToHtml(wikilinks($page->content)) !!}
+    </div>
 
     <nav class="wiki-lite wiki-lite-link-backs">
         <h2>Pages which link back to this one</h2>

@@ -1,0 +1,21 @@
+div.wiki-lite-diff-header {
+    margin-top: 0.5em;
+    border-top: 1px solid $wiki-lite-color-primary;
+    padding-top: 0.5em;
+}
+
+ul.wiki-lite-diff-item {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    li {
+        grid-column-start: span 1;
+        text-align: center;
+    }
+}
+
+pre.wiki-lite-diff {
+    margin-top: 0.5em;
+    border-top: 1px solid $wiki-lite-color-primary;
+    padding-top: 0.5em;
+}

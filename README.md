@@ -62,7 +62,9 @@ Revision comparison uses unified diff format.
 
 ## Styling
 
-No styling is provided with this wiki module - but CSS classes have been set on various elements to help with customising the wiki to fit.
+Some styles are included in the module. They are published into `resources/assets/sass/vendor/savvywombat/wiki-lite`.
+
+You can import them into your application styles by adding `@import "vendor/savvywombat/wiki-lite/wiki-lite"` in your `app.scss` file. 
 
 ## Support
 

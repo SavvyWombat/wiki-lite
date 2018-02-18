@@ -15,11 +15,11 @@ class WikiController extends BaseController
             ->get();
 
         if (count($pages)) {
-            return view('wiki-lite::wiki.index', 
+            return view('savvywombat/wiki-lite::wiki.index', 
                 [ 'pages' => $pages, ]
             );
         } else {
-            return view('wiki-lite::wiki.welcome', [
+            return view('savvywombat/wiki-lite::wiki.welcome', [
                 'page' => new Page(),
             ]);
         }
