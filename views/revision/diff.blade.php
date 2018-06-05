@@ -2,7 +2,9 @@
 
 @section('wiki-content')
 <article class="wiki-lite wiki-lite-diff">
-    <h1>Comparing <a class="wikilink" href="{{ route('wiki-lite.view', $page->slug) }}">{{ $page->title }}</a></h1>
+    <h1>Comparing <a class="wiki-lite-wikilink" href="{{ route('wiki-lite.view', $page->slug) }}">{{ $page->title }}</a></h1>
+
+    
 
     <div class="wiki-lite-diff-header">
         <ul class="wiki-lite-diff-item">

@@ -2,7 +2,7 @@
 
 @section('wiki-content')
 <article class="wiki-lite wiki-lite-history">
-    <h1>Revision history for: <a class="wikilink" href="{{ route('wiki-lite.view', $page->slug) }}">{{ $page->title }}</a></h1>
+    <h1>Revision history for <a class="wiki-lite-wikilink" href="{{ route('wiki-lite.view', $page->slug) }}">{{ $page->title }}</a></h1>
 
     <form method="POST" action="{{ route('wiki-lite.diff-post') }}">
         {{ csrf_field() }}

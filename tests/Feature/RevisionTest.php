@@ -30,7 +30,8 @@ class RevisionTest extends TestCase
 
         $this->get("/wiki/view/{$first->slug}/revisions")
             ->assertStatus(200)
-            ->assertSee("Revision history for: {$third->title}")
+            ->assertSee("Revision history for")
+            ->assertSee("$third->title")
             ->assertDontSee($first->content)
             ->assertSee($first->updated_at->toDateTimeString())
             ->assertDontSee($second->content)
@@ -59,7 +60,8 @@ class RevisionTest extends TestCase
 
         $this->get("/wiki/view/{$before->slug}/diff/{$after->revision}/{$before->revision}")
             ->assertStatus(200)
-            ->assertSee("Comparing {$latest->title}")
+            ->assertSee("Comparing")
+            ->assertSee($latest->title)
             ->assertSee($before->title)
             ->assertSee($after->title)
             ->assertSee($before->updated_at->toDateTimeString())

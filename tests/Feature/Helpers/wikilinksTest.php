@@ -17,7 +17,7 @@ class wikilinksTest extends TestCase
     public function it_replaces_all_wikilinks_in_content()
     {
         $this->assertEquals(
-            sprintf("Content [%s](/wiki/view/%s){class='wikilink wikilink-missing'} content and [%s](/wiki/view/%s){class='wikilink wikilink-missing'}",
+            sprintf("Content [%s](/wiki/view/%s){class='wiki-lite-wikilink wiki-lite-wikilink-missing'} content and [%s](/wiki/view/%s){class='wiki-lite-wikilink wiki-lite-wikilink-missing'}",
                 "the title I want to link to",
                 "the-title-i-want-to-link-to",
                 "another link",
