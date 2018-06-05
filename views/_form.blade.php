@@ -15,7 +15,7 @@
         @endif
 
         <div>
-            <input id="title" type="text" name="title" value="{{ $page->title }}" autofocus>           
+            <input id="title" type="text" name="title" value="{{ old('title', $page->title) }}" autofocus>           
         </div>
     </div>
 
@@ -31,7 +31,7 @@
 
             <div class="textarea-wrap">
                 <div class="textarea-pull"></div>
-                <textarea id="content" name="content">{{ $page->content }}</textarea>
+                <textarea id="content" name="content">{{ old('content', $page->content) }}</textarea>
             </div>
         </div>
     </div>
