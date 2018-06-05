@@ -356,7 +356,8 @@ class PageTest extends TestCase
 
         $this->get("/wiki/edit/{$page->slug}")
             ->assertStatus(200)
-            ->assertSee("Editing " . $page->title)
+            ->assertSee("Editing")
+            ->assertSee($page->title)
             ->assertSee($page->content)
             ->assertSee($page->uuid);
     }
@@ -379,7 +380,8 @@ class PageTest extends TestCase
 
         $this->get("/wiki/edit/{$firstRevision->slug}")
             ->assertStatus(200)
-            ->assertSee("Editing " . $thirdRevision->title)
+            ->assertSee("Editing")
+            ->assertSee($thirdRevision->title)
             ->assertSee($thirdRevision->content)
             ->assertSee($firstRevision->uuid);
     }

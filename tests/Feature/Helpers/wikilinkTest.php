@@ -17,7 +17,7 @@ class wikilinkTest extends TestCase
     public function it_generates_a_missing_link_based_on_title()
     {
         $this->assertEquals(
-            sprintf("[%s](/wiki/view/%s){class='wikilink wikilink-missing'}",
+            sprintf("[%s](/wiki/view/%s){class='wiki-lite-wikilink wiki-lite-wikilink-missing'}",
                 "The title I want to link to",
                 "the-title-i-want-to-link-to"
             ),
@@ -36,7 +36,7 @@ class wikilinkTest extends TestCase
         $page->save();
 
         $this->assertEquals(
-            sprintf("[%s](/wiki/view/%s){class='wikilink'}",
+            sprintf("[%s](/wiki/view/%s){class='wiki-lite-wikilink'}",
                 "The title I want to link to",
                 "the-title-i-want-to-link-to"
             ),
