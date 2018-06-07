@@ -17,4 +17,21 @@ article.wiki-lite {
         margin-left: 1em;
         margin-right: 1em;
     }
+
+    pre {
+        margin-left: 1em;
+        margin-right: 1em;
+        padding: 0.5em 1em; 
+
+        background-color: #2c3747;
+        color: #ffffff;
+    }
+
+    blockquote {
+        margin-left: 1em;
+        margin-right: 1em;
+        padding: 0.5em 1em;
+
+        background-color: #dee8f7;
+    }
 }
