@@ -1,3 +1,5 @@
+# Not actively maintained
+
 # Wiki-Lite
 
 A light weight wiki for use in Laravel 5
